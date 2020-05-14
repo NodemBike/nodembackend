@@ -6,7 +6,6 @@ module.exports = {
     database: process.env.DB,
     dialect: process.env.DIALECT,
     port: process.env.PGPORT,
-    ssl: true,
     pool: {
         max: 5, //max: maximum number of connection in pool
         min: 0, //min: minimum number of connection in pool

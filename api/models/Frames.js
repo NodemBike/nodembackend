@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize, Providers) => {
 
     const Frames = sequelize.define("frames",
         {
@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
                 primaryKey: true
             },
             price: {
-                type: Sequelize.INT,
+                type: Sequelize.INTEGER,
                 allowNull: false,
 
             },
@@ -27,7 +27,11 @@ module.exports = (sequelize, Sequelize) => {
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             },
-        });
+        }, {
+        paranoid: true,
+        underscored: true
+
+    });
     return Frames;
 
 }

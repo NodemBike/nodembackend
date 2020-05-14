@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize,db) => {
 
     const Bikeparts = sequelize.define("bikeparts",
         {
@@ -11,46 +11,50 @@ module.exports = (sequelize, Sequelize) => {
             frame_uuid: {
                 type: Sequelize.UUID,
                 references: {
-                    model: Frames,
+                    model: db.Frames,
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             },
             batter_uuid: {
                 type: Sequelize.UUID,
                 references: {
-                    model: Batteries,
+                    model: db.Batteries,
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             },
             motor_uuid: {
                 type: Sequelize.UUID,
                 references: {
-                    model: Motors,
+                    model: db.Motors,
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             },
             fork_uuid: {
                 type: Sequelize.UUID,
                 references: {
-                    model: Forks,
+                    model: db.Forks,
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             },
             fwheel_uuid: {
                 type: Sequelize.UUID,
                 references: {
-                    model: FWheels,
+                    model: db.FWheels,
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             },
             rwheel_uuid: {
                 type: Sequelize.UUID,
                 references: {
-                    model: RWheels,
+                    model: db.RWheels,
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             },
-        });
+        }, {
+        paranoid: true,
+        underscored: true
+
+    });
 
     return Bikeparts;
 

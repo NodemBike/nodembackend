@@ -11,7 +11,11 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-        });
+        }, {
+        paranoid: true,
+        underscored: true
+
+    });
 
     return Types;
 

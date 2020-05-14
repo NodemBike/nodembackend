@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize, Brands) => {
 
     const Models = sequelize.define("models",
         {
@@ -18,6 +18,10 @@ module.exports = (sequelize, Sequelize) => {
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             }
-        });
+        }, {
+        paranoid: true,
+        underscored: true
+
+    });
     return Models;
 }

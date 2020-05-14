@@ -1,6 +1,6 @@
 
-module.exports = (sequelize, Sequelize) => {
-    
+module.exports = (sequelize, Sequelize, db) => {
+
     const Users = sequelize.define("user",
         {
             uuid: {
@@ -20,24 +20,28 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            id: {
-                type: Sequelize.INT,
+            id_doc: {
+                type: Sequelize.STRING,
                 allowNull: false,
             },
             phone: {
                 type: Sequelize.STRING,
             },
             is_verified: {
-                type: Sequelize.BOOL,
+                type: Sequelize.BOOLEAN,
             },
             bike_uuid: {
                 type: Sequelize.UUID,
                 references: {
-                    model: Bikes,
+                    model: db.Bikes,
                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
                 }
             }
-        });
+        }, {
+        paranoid: true,
+        underscored: true
+
+    });
 
     return Users;
 }
