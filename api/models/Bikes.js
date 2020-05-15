@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize,db) =>{
+module.exports = (sequelize, Sequelize) =>{
 
     const Bikes = sequelize.define("bikes",
         {
@@ -10,40 +10,8 @@ module.exports = (sequelize, Sequelize,db) =>{
             image: {
                 type: Sequelize.STRING,
             },
-            model_uuid: {
+            user_uuid: {
                 type: Sequelize.UUID,
-                references: {
-                    model: db.Models,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
-            },
-            type_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: db.Types,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
-            },
-            warranty_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: db.Warranties,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
-            },
-            state_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: db.States,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
-            },
-            parts_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: db.Bikeparts,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
             },
         }, {
         paranoid: true,

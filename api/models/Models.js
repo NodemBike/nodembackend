@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, Brands) => {
+module.exports = (sequelize, Sequelize) => {
 
     const Models = sequelize.define("models",
         {
@@ -11,13 +11,6 @@ module.exports = (sequelize, Sequelize, Brands) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            brand_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: Brands,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
-            }
         }, {
         paranoid: true,
         underscored: true

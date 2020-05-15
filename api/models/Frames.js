@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, Sequelize, Providers) => {
+module.exports = (sequelize, Sequelize) => {
 
     const Frames = sequelize.define("frames",
         {
@@ -19,13 +19,6 @@ module.exports = (sequelize, Sequelize, Providers) => {
             },
             image: {
                 type: Sequelize.STRING,
-            },
-            provider_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: Providers,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
             },
         }, {
         paranoid: true,

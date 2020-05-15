@@ -17,7 +17,12 @@ app.get("/", (req, res) => {
 });
 
 // db
-db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
+});
+
+
+require("./api/routes/routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

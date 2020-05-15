@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, Sequelize, db) => {
+module.exports = (sequelize, Sequelize) => {
 
     const Users = sequelize.define("user",
         {
@@ -20,6 +20,10 @@ module.exports = (sequelize, Sequelize, db) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            email:{
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
             id_doc: {
                 type: Sequelize.STRING,
                 allowNull: false,
@@ -30,13 +34,6 @@ module.exports = (sequelize, Sequelize, db) => {
             is_verified: {
                 type: Sequelize.BOOLEAN,
             },
-            bike_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: db.Bikes,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
-            }
         }, {
         paranoid: true,
         underscored: true

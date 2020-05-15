@@ -30,23 +30,52 @@ db.States = require("./Providers.js")(sequelize, Sequelize);
 db.Warranties = require("./Warranties.js")(sequelize, Sequelize);
 db.Types = require("./Types.js")(sequelize, Sequelize);
 db.Brands = require("./Brands.js")(sequelize, Sequelize);
-db.Models = require("./Models.js")(sequelize, Sequelize,db.Brands);
-db.RWheels = require("./RWheels.js")(sequelize, Sequelize, db.Providers);
-db.FWheels = require("./FWheels.js")(sequelize, Sequelize, db.Providers);
-db.Forks = require("./Forks.js")(sequelize, Sequelize, db.Providers);
-db.Motors = require("./Motors.js")(sequelize, Sequelize, db.Providers);
-db.Batteries = require("./Batteries.js")(sequelize, Sequelize, db.Providers);
-db.Frames = require("./Frames.js")(sequelize, Sequelize, db.Providers);
-db.Bikeparts = require("./Bikeparts.js")(sequelize, Sequelize,db);
-db.Bikes = require("./Bikes.js")(sequelize, Sequelize,db);
-db.Users = require("./Users.js")(sequelize, Sequelize,db);
+db.Models = require("./Models.js")(sequelize, Sequelize);
+db.RWheels = require("./RWheels.js")(sequelize, Sequelize);
+db.FWheels = require("./FWheels.js")(sequelize, Sequelize);
+db.Forks = require("./Forks.js")(sequelize, Sequelize);
+db.Motors = require("./Motors.js")(sequelize, Sequelize);
+db.Batteries = require("./Batteries.js")(sequelize, Sequelize);
+db.Frames = require("./Frames.js")(sequelize, Sequelize);
+db.Bikeparts = require("./Bikeparts.js")(sequelize, Sequelize);
+db.Bikes = require("./Bikes.js")(sequelize, Sequelize);
+db.Users = require("./Users.js")(sequelize, Sequelize);
 
-// relations
-db.RWheels.hasMany(db.Providers);
-db.FWheels.hasMany(db.Providers);
-db.Forks.hasMany(db.Providers);
-db.Motors.hasMany(db.Providers);
-db.Batteries.hasMany(db.Providers);
-db.Frames.hasMany(db.Providers);
+/* Relations to providers
+ BelongsTo associations are associations where the foreign key for the one-to-one relation exists on the source model.
+User.belongsTo(Company); // Will add companyId to user
 
+Project.hasOne(User)
+In this example hasOne will add an attribute projectId to the User model!
+
+*/
+
+//Bike relations
+db.Brands.hasMany(db.Models); //Bike 
+db.Bikes.hasOne(db.Models);
+db.Types.hasMany(db.Bikes);
+db.States.hasMany(db.Bikes);
+db.Warranties.belongsTo(db.Bikes);
+db.Bikeparts.belongsTo(db.Bikes); // Will add BikeId to Bikeparts
+db.Bikes.belongsTo(db.Users); // Will add BikeId to Bikeparts
+
+//Providers
+db.Providers.hasMany(db.Forks);
+db.Providers.hasMany(db.RWheels);
+db.Providers.hasMany(db.FWheels);
+db.Providers.hasMany(db.Batteries);
+db.Providers.hasMany(db.Motors);
+db.Providers.hasMany(db.Frames); 
+
+// Bike Parts
+db.Forks.belongsTo(db.Bikeparts);
+db.RWheels.belongsTo(db.Bikeparts);
+db.FWheels.belongsTo(db.Bikeparts);
+db.Batteries.belongsTo(db.Bikeparts);
+db.Motors.belongsTo(db.Bikeparts);
+db.Frames.belongsTo(db.Bikeparts);
+
+//
+
+db.Bikes.sync();
 module.exports = db;

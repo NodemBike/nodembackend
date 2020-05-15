@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, Providers) => {
+module.exports = (sequelize, Sequelize) => {
 
     const Forks = sequelize.define("forks",
         {
@@ -18,13 +18,6 @@ module.exports = (sequelize, Sequelize, Providers) => {
             },
             image: {
                 type: Sequelize.STRING,
-            },
-            provider_uuid: {
-                type: Sequelize.UUID,
-                references: {
-                    model: Providers,
-                    deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-                }
             },
         }, {
         paranoid: true,
