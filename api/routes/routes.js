@@ -1,13 +1,19 @@
-module.exports = app => {
-    const users = require("../controller/usercontroller");
 
-    var router = require("express").Router();
+const users = require("../controller/usercontroller");
+const bikes = require("../controller/bikecontroller");
+var router = require("express").Router();
 
-    // Create a new Tutorial
-    router.post("/", users.create);
+// Create methods
+router.post("/newuser", users.create);
+router.post("/newbike", bikes.create);
 
-    // Retrieve all Tutorials
-    router.get("/", users.findAll);
+// Retrieve all Tutorials
+router.get("/users", users.findAll);
+// Retrieve all Tutorials
+router.get("/getusers", users.getUsers);
 
-    app.use('/api/users', router);
-};
+//
+router.get('/test', (req, res) => res.send("tet"));
+
+
+module.exports = router;

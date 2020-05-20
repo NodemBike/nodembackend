@@ -11,7 +11,6 @@ module.exports = (sequelize, Sequelize) => {
             bike_uuid: {
                 type: Sequelize.UUID,
             },
-
            
         }, {
         paranoid: true,

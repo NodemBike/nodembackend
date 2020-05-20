@@ -1,12 +1,12 @@
 const db = require("../models");
-const Users = db.Users;
+const Bikes = db.Bikes;
 const Op = db.Sequelize.Op;
 
-//Create and Save a new User
+//Create and Save a new bike
 exports.create = (req, res) => {
 
     // Validate request
-    if (!req.body.name) {
+    if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -14,16 +14,12 @@ exports.create = (req, res) => {
     }
 
     // Create a User
-    const user = {
-        name: req.body.name,
-        last_name: req.body.last_name,
-        user_name: req.body.user_name,
-        email: req.body.email,
-        id_doc: req.body.id_doc,
+    const bike = {
+        userUuid: req.body.userUuid,
     };
 
     // Save User in the database
-    Users.create(user)
+    Bikes.create(bike)
         .then(data => {
             res.send(data);
         })
@@ -52,9 +48,6 @@ exports.findAll = (req, res) => {
             });
         });
 };
-
-
-exports.getUsers =(req,res) => Users.findAll().then(allUsers => res.send(allUsers));
 
 // Find a single User with an uuid
 exports.findOne = (req, res) => {
