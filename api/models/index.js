@@ -57,7 +57,6 @@ db.Types.hasMany(db.Bikes);
 db.States.hasMany(db.Bikes);
 db.Warranties.belongsTo(db.Bikes);
 db.Bikeparts.belongsTo(db.Bikes); // Will add BikeId to Bikeparts
-db.Bikes.belongsTo(db.Users); // Will add BikeId to Bikeparts
 
 //Providers
 db.Providers.hasMany(db.Forks);
@@ -76,6 +75,12 @@ db.Motors.belongsTo(db.Bikeparts);
 db.Frames.belongsTo(db.Bikeparts);
 
 //
+
+Object.keys(db).forEach(modelName => {
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
+    }
+});
 
 db.Bikes.sync();
 module.exports = db;

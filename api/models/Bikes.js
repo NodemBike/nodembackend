@@ -15,5 +15,12 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
     });
 
+    Bikes.associate = models => {
+        Bikes.belongsTo(models.Users,
+            {
+                foreignKey: { allowNull: false }
+            });
+    };
+
     return Bikes;
 }
