@@ -25,7 +25,13 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-
+    RWheels.associate = models => {
+        RWheels.belongsTo(models.Bikeparts,
+            {
+                foreignKey: { 
+                    allowNull: false }
+            });
+        }
     return RWheels;
 
 }

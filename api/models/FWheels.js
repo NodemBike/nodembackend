@@ -24,6 +24,12 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-
+    FWheels.associate = models => {
+        FWheels.belongsTo(models.Bikeparts,
+            {
+                foreignKey: { 
+                    allowNull: false }
+            });
+        }
     return FWheels;
 }

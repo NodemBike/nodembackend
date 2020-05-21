@@ -21,6 +21,12 @@ module.exports = (sequelize, Sequelize) => {
                 foreignKey: { allowNull: false }
             });
     };
+    Bikes.associate = models => {
+        Bikes.hasOne(models.Bikeparts,
+            {
+                onDelete: "cascade"
+            });
+    };
 
     return Bikes;
 }

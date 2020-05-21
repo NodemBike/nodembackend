@@ -1,7 +1,4 @@
 const db = require("../models");
-const Users = db.Users;
-const Bikes = db.Bikes;
-const Bikeparts = db.Bikeparts;
 const Frames = db.Frames;
 const Op = db.Sequelize.Op;
 
@@ -17,17 +14,15 @@ exports.create = (req, res) => {
     }
 
     // Create a User
-    const user = {
-        name: req.body.name,
-        last_name: req.body.last_name,
-        user_name: req.body.user_name,
-        email: req.body.email,
-        id_doc: req.body.id_doc,
-        phone: req.body.phone
+    const part = {
+        price: req.body.price,
+        date_of_production: req.body.date_of_production,
+        image: req.body.image,
+        bikepartUuid: req.body.bikepartUuid
     };
 
     // Save User in the database
-    Users.create(user)
+    Frames.create(part)
         .then(data => {
             res.send(data);
         })
@@ -41,11 +36,11 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Users from the database.
-exports.findAll = (req, res) => {
+exports.getFrame = (req, res) => {
     const name = req.query.name;
     var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
 
-    Users.findAll({ where: condition })
+    Frames.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -56,27 +51,6 @@ exports.findAll = (req, res) => {
             });
         });
 };
-
-
-exports.getUsers = (req, res) => Users.findAll(
-    { 
-        include: 
-        [
-            {
-            model: Bikes,
-            include: 
-            [
-                {
-            model: Bikeparts,
-            include:[Frames]
-        }
-    ]
-        }
-    ]
-    }
-        
-            )
-                .then(allUsers => res.send(allUsers));
 
 // Find a single User with an uuid
 exports.findOne = (req, res) => {

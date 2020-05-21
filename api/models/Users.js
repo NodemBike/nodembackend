@@ -47,6 +47,5 @@ module.exports = (sequelize, Sequelize) => {
             });
     };
 
-
     return Users;
 }

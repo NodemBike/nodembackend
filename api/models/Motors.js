@@ -24,7 +24,13 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-
+    Motors.associate = models => {
+        Motors.belongsTo(models.Bikeparts,
+            {
+                foreignKey: { 
+                    allowNull: false }
+            });
+        }
     return Motors;
 
 }

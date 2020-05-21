@@ -24,6 +24,12 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-
+    Forks.associate = models => {
+        Forks.belongsTo(models.Bikeparts,
+            {
+                foreignKey: { 
+                    allowNull: false }
+            });
+        }
     return Forks;
 }

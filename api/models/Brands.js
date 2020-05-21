@@ -16,6 +16,6 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-
+    
     return Brands;
 }

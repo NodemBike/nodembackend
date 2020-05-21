@@ -51,28 +51,28 @@ In this example hasOne will add an attribute projectId to the User model!
 */
 
 //Bike relations
-db.Brands.hasMany(db.Models); //Bike 
-db.Bikes.hasOne(db.Models);
-db.Types.hasMany(db.Bikes);
-db.States.hasMany(db.Bikes);
-db.Warranties.belongsTo(db.Bikes);
-db.Bikeparts.belongsTo(db.Bikes); // Will add BikeId to Bikeparts
+// db.Brands.hasMany(db.Models); //Bike 
+// db.Bikes.hasOne(db.Models);
+// db.Types.hasMany(db.Bikes);
+// db.States.hasMany(db.Bikes);
+// db.Warranties.belongsTo(db.Bikes);
 
-//Providers
-db.Providers.hasMany(db.Forks);
-db.Providers.hasMany(db.RWheels);
-db.Providers.hasMany(db.FWheels);
-db.Providers.hasMany(db.Batteries);
-db.Providers.hasMany(db.Motors);
-db.Providers.hasMany(db.Frames); 
 
-// Bike Parts
-db.Forks.belongsTo(db.Bikeparts);
-db.RWheels.belongsTo(db.Bikeparts);
-db.FWheels.belongsTo(db.Bikeparts);
-db.Batteries.belongsTo(db.Bikeparts);
-db.Motors.belongsTo(db.Bikeparts);
-db.Frames.belongsTo(db.Bikeparts);
+// //Providers
+// db.Providers.hasMany(db.Forks);
+// db.Providers.hasMany(db.RWheels);
+// db.Providers.hasMany(db.FWheels);
+// db.Providers.hasMany(db.Batteries);
+// db.Providers.hasMany(db.Motors);
+// db.Providers.hasMany(db.Frames); 
+
+// // Bike Parts
+// db.Forks.belongsTo(db.Bikeparts);
+// db.RWheels.belongsTo(db.Bikeparts);
+// db.FWheels.belongsTo(db.Bikeparts);
+// db.Batteries.belongsTo(db.Bikeparts);
+// db.Motors.belongsTo(db.Bikeparts);
+// db.Frames.belongsTo(db.Bikeparts);
 
 //
 
