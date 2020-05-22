@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
         {
             uuid: {
                 type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIV4,
+                defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
             price: {
@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     FWheels.associate = models => {
-        FWheels.belongsTo(models.Bikeparts,
+        FWheels.belongsTo(models.Providers,
             {
                 foreignKey: { 
                     allowNull: false }

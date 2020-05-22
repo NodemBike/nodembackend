@@ -8,60 +8,51 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             }
-            // bike_uuid: {
-            //     type: Sequelize.UUID,
-            // },
-           
         }, {
         paranoid: true,
         underscored: true
-        
+
     });
 
     Bikeparts.associate = models => {
         Bikeparts.belongsTo(models.Bikes,
             {
-                foreignKey: { 
-                    allowNull: false }
+                foreignKey: {
+                    allowNull: false
+                }
             });
     };
     Bikeparts.associate = models => {
-        Bikeparts.hasOne(models.Forks,
+        Bikeparts.hasMany(models.Providers,
             {
                 onDelete: "cascade"
             });
+        // Bikeparts.hasOne(models.Frames,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.Forks,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.FWheels,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.RWheels,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.Motors,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.Batteries,
+        //     {
+        //         onDelete: "cascade"
+        //     });
     };
-    Bikeparts.associate = models => {
-        Bikeparts.hasOne(models.Frames,
-            {
-                onDelete: "cascade"
-            });
-    };
-    Bikeparts.associate = models => {
-        Bikeparts.hasOne(models.FWheels,
-            {
-                onDelete: "cascade"
-            });
-    };
-    Bikeparts.associate = models => {
-        Bikeparts.hasOne(models.BWheels,
-            {
-                onDelete: "cascade"
-            });
-    };
-    Bikeparts.associate = models => {
-        Bikeparts.hasOne(models.Motors,
-            {
-                onDelete: "cascade"
-            });
-    };
-    Bikeparts.associate = models => {
-        Bikeparts.hasOne(models.Batteries,
-            {
-                onDelete: "cascade"
-            });
-    };
-    
+
     return Bikeparts;
 
 }

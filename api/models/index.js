@@ -26,9 +26,8 @@ db.sequelize = sequelize;
 
 // adding the models to the db
 db.Providers = require("./Providers.js")(sequelize, Sequelize);
-db.States = require("./Providers.js")(sequelize, Sequelize);
+db.States = require("./States.js")(sequelize, Sequelize);
 db.Warranties = require("./Warranties.js")(sequelize, Sequelize);
-db.Types = require("./Types.js")(sequelize, Sequelize);
 db.Brands = require("./Brands.js")(sequelize, Sequelize);
 db.Models = require("./Models.js")(sequelize, Sequelize);
 db.RWheels = require("./RWheels.js")(sequelize, Sequelize);
@@ -50,7 +49,7 @@ In this example hasOne will add an attribute projectId to the User model!
 
 */
 
-//Bike relations
+// Bike relations
 // db.Brands.hasMany(db.Models); //Bike 
 // db.Bikes.hasOne(db.Models);
 // db.Types.hasMany(db.Bikes);
@@ -72,9 +71,9 @@ In this example hasOne will add an attribute projectId to the User model!
 // db.FWheels.belongsTo(db.Bikeparts);
 // db.Batteries.belongsTo(db.Bikeparts);
 // db.Motors.belongsTo(db.Bikeparts);
-// db.Frames.belongsTo(db.Bikeparts);
+// db.Frames.belongsTo(db.Bikeparts, {as: 'frames'});
 
-//
+
 
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {

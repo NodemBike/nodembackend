@@ -1,5 +1,5 @@
 const db = require("../models");
-const Frames = db.Frames;
+const Batteries = db.Batteries;
 const Op = db.Sequelize.Op;
 
 //Create and Save a new User
@@ -22,7 +22,7 @@ exports.create = (req, res) => {
     };
 
     // Save User in the database
-    Frames.create(part)
+    Batteries.create(part)
         .then(data => {
             res.send(data);
         })
@@ -36,11 +36,11 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Users from the database.
-exports.getFrame = (req, res) => {
+exports.getMotor = (req, res) => {
     const name = req.query.name;
     var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
 
-    Frames.findAll({ where: condition })
+    Batteries.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -81,4 +81,3 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
 
 };
-

@@ -1,7 +1,5 @@
 const db = require("../models");
 const Bikes = db.Bikes;
-const Bikeparts = db.Bikeparts;
-const Frames = db.Frames;
 const Op = db.Sequelize.Op;
 
 //Create and Save a new bike
@@ -53,10 +51,7 @@ exports.findAll = (req, res) => {
 
 exports.getBikes = (req, res) => Bikes.findAll({ 
     include: [
-        {
-        model: Bikeparts,
-        include: [Frames]
-    }
+        { all:true, nested:true }
     ]}
     ).then(allBikes => res.send(allBikes));
 

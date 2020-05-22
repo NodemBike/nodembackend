@@ -1,8 +1,5 @@
 const db = require("../models");
 const Users = db.Users;
-const Bikes = db.Bikes;
-const Bikeparts = db.Bikeparts;
-const Frames = db.Frames;
 const Op = db.Sequelize.Op;
 
 //Create and Save a new User
@@ -57,26 +54,17 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.getOnlyUser = (req, res) => Users.findAll()
+    .then(allUsers => res.send(allUsers));
 
 exports.getUsers = (req, res) => Users.findAll(
-    { 
-        include: 
-        [
-            {
-            model: Bikes,
-            include: 
-            [
-                {
-            model: Bikeparts,
-            include:[Frames]
-        }
-    ]
-        }
-    ]
+    {include:
+            [{ all:true, nested:true }
+            ]
     }
-        
-            )
-                .then(allUsers => res.send(allUsers));
+
+)
+    .then(allUsers => res.send(allUsers));
 
 // Find a single User with an uuid
 exports.findOne = (req, res) => {

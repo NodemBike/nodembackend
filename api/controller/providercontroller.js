@@ -1,5 +1,5 @@
 const db = require("../models");
-const Frames = db.Frames;
+const Providers = db.Providers;
 const Op = db.Sequelize.Op;
 
 //Create and Save a new User
@@ -15,14 +15,12 @@ exports.create = (req, res) => {
 
     // Create a User
     const part = {
-        price: req.body.price,
-        date_of_production: req.body.date_of_production,
-        image: req.body.image,
-        providerUuid: req.body.providerUuid
+        name: req.body.name,
+        bikepartUuid: req.body.bikepartUuid
     };
 
     // Save User in the database
-    Frames.create(part)
+    Providers.create(part)
         .then(data => {
             res.send(data);
         })
@@ -36,11 +34,11 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Users from the database.
-exports.getFrame = (req, res) => {
+exports.getRwheel = (req, res) => {
     const name = req.query.name;
     var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
 
-    Frames.findAll({ where: condition })
+    Providers.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -81,4 +79,3 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
 
 };
-
