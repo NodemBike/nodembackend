@@ -5,18 +5,53 @@ module.exports = (sequelize, Sequelize) => {
         {
             uuid: {
                 type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIV4,
+                defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
-            },
-            bike_uuid: {
-                type: Sequelize.UUID,
-            },
-           
+            }
         }, {
         paranoid: true,
         underscored: true
 
     });
+
+    Bikeparts.associate = models => {
+        Bikeparts.belongsTo(models.Bikes,
+            {
+                foreignKey: {
+                    allowNull: false
+                }
+            });
+    };
+    Bikeparts.associate = models => {
+        Bikeparts.hasMany(models.Providers,
+            {
+                onDelete: "cascade"
+            });
+        // Bikeparts.hasOne(models.Frames,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.Forks,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.FWheels,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.RWheels,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.Motors,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+        // Bikeparts.hasOne(models.Batteries,
+        //     {
+        //         onDelete: "cascade"
+        //     });
+    };
 
     return Bikeparts;
 

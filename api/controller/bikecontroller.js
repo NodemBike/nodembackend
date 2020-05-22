@@ -49,6 +49,12 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.getBikes = (req, res) => Bikes.findAll({ 
+    include: [
+        { all:true, nested:true }
+    ]}
+    ).then(allBikes => res.send(allBikes));
+
 // Find a single User with an uuid
 exports.findOne = (req, res) => {
     const uuid = req.params.uuid;

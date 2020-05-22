@@ -20,7 +20,22 @@ module.exports = (sequelize, Sequelize) => {
             {
                 foreignKey: { allowNull: false }
             });
+        Bikes.hasOne(models.Bikeparts,
+            {
+                onDelete: "cascade"
+            });
+        Bikes.hasOne(models.Warranties,
+            {
+                onDelete: "cascade"
+            });
+        Bikes.hasOne(models.Brands,
+            {
+                onDelete: "cascade"
+            });
+        Bikes.hasOne(models.States,
+            {
+                onDelete: "cascade"
+            });
     };
-
     return Bikes;
 }
