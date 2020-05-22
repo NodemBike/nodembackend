@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
         {
             uuid: {
                 type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIV4,
+                defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
             name: {
@@ -16,7 +16,12 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-
+    Warranties.associate = models => {
+        Warranties.belongsTo(models.Bikes,
+            {
+                foreignKey: { allowNull: false }
+            });
+    };
     return Warranties;
 
 }

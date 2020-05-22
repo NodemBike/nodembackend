@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
         {
             uuid: {
                 type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIV4,
+                defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
             name: {
@@ -16,6 +16,19 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-
+    Brands.associate = models => {
+        Brands.belongsTo(models.Bikes,
+            {
+                foreignKey: {
+                    allowNull: false
+                }
+            });
+        Brands.hasOne(models.Models,
+            {
+                foreignKey: {
+                    allowNull: false
+                }
+            });
+    }
     return Brands;
 }

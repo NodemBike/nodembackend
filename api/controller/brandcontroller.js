@@ -1,5 +1,5 @@
 const db = require("../models");
-const Users = db.Users;
+const Brands = db.Brands;
 const Op = db.Sequelize.Op;
 
 //Create and Save a new User
@@ -14,17 +14,13 @@ exports.create = (req, res) => {
     }
 
     // Create a User
-    const user = {
+    const part = {
         name: req.body.name,
-        last_name: req.body.last_name,
-        user_name: req.body.user_name,
-        email: req.body.email,
-        id_doc: req.body.id_doc,
-        phone: req.body.phone
+        bikeUuid: req.body.bikeUuid
     };
 
     // Save User in the database
-    Users.create(user)
+    Brands.create(part)
         .then(data => {
             res.send(data);
         })
@@ -38,11 +34,11 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Users from the database.
-exports.findAll = (req, res) => {
+exports.getRwheel = (req, res) => {
     const name = req.query.name;
     var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
 
-    Users.findAll({ where: condition })
+    Brands.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -53,18 +49,6 @@ exports.findAll = (req, res) => {
             });
         });
 };
-
-exports.getOnlyUser = (req, res) => Users.findAll()
-    .then(allUsers => res.send(allUsers));
-
-exports.getUsers = (req, res) => Users.findAll(
-    {include:
-            [{ all:true, nested:true }
-            ]
-    }
-
-)
-    .then(allUsers => res.send(allUsers));
 
 // Find a single User with an uuid
 exports.findOne = (req, res) => {
@@ -95,4 +79,3 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
 
 };
-
