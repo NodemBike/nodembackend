@@ -16,13 +16,13 @@ module.exports = (sequelize, Sequelize) => {
         underscored: true
 
     });
-    States.associate = models => {
+    /*States.associate = models => {
         States.belongsTo(models.Bikes,
             {
                 foreignKey: {
                     allowNull: false
                 }
             });
-    }
+    }*/
     return States;
 }

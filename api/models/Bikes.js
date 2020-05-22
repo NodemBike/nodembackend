@@ -37,5 +37,7 @@ module.exports = (sequelize, Sequelize) => {
                 onDelete: "cascade"
             });
     };
+
+
     return Bikes;
 }

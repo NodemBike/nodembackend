@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     // Create a User
     const user = {
         name: req.body.name,
+        password: req.body.password,
         last_name: req.body.last_name,
         user_name: req.body.user_name,
         email: req.body.email,
@@ -37,29 +38,51 @@ exports.create = (req, res) => {
 
 };
 
+exports.login = (req, res) => {
+
+    Users.findOne({
+        where: {
+            email: req.body.email,
+            password: req.body.password,
+        }
+    }).then(user => {
+        if(user){
+        res.status(200).send(user);
+        print(user.body);
+        }else{
+            res.status(404).send({
+                message: " Error while trying to login a user"
+            });
+        }
+    });
+
+}
+
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
     const name = req.query.name;
     var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
 
-    Users.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Users."
-            });
+    Users.findAll({
+        where: condition
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            header: "sdfa",
+            message:
+                err.message || "Some error occurred while retrieving Users."
         });
+    });
 };
 
 exports.getOnlyUser = (req, res) => Users.findAll()
     .then(allUsers => res.send(allUsers));
 
 exports.getUsers = (req, res) => Users.findAll(
-    {include:
-            [{ all:true, nested:true }
+    {
+        include:
+            [{ all: true, nested: true }
             ]
     }
 
@@ -70,7 +93,7 @@ exports.getUsers = (req, res) => Users.findAll(
 exports.findOne = (req, res) => {
     const uuid = req.params.uuid;
 
-    Tutorial.findByPk(uuid)
+    Users.findByPk(uuid)
         .then(data => {
             res.send(data);
         })

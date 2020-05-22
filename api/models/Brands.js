@@ -17,13 +17,7 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     Brands.associate = models => {
-        Brands.belongsTo(models.Bikes,
-            {
-                foreignKey: {
-                    allowNull: false
-                }
-            });
-        Brands.hasOne(models.Models,
+        Brands.hasMany(models.Models,
             {
                 foreignKey: {
                     allowNull: false

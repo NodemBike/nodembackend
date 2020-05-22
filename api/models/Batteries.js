@@ -20,20 +20,21 @@ module.exports = (sequelize, Sequelize) => {
             image: {
                 type: Sequelize.STRING,
             },
-            
+
         },
         {
             paranoid: true,
             underscored: true
 
         });
-        Batteries.associate = models => {
-            Batteries.belongsTo(models.Providers,
-                {
-                    foreignKey: { 
-                        allowNull: false }
-                });
-            }
+    Batteries.associate = models => {
+        Batteries.belongsTo(models.Bikeparts,
+            {
+                foreignKey: {
+                    allowNull: false
+                }
+            });
+    }
     return Batteries;
 
 }

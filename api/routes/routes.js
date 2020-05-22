@@ -45,6 +45,8 @@ router.get("/getonlyusers", users.getOnlyUser);
 //
 router.get('/test', (req, res) => res.send("tet"));
 
+// Login
+router.post('/login', users.login);
 
 
 module.exports = router;

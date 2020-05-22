@@ -26,7 +26,7 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     RWheels.associate = models => {
-        RWheels.belongsTo(models.Providers,
+        RWheels.belongsTo(models.Bikeparts,
             {
                 foreignKey: { 
                     allowNull: false }

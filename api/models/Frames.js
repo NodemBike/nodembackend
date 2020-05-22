@@ -26,7 +26,7 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     Frames.associate = models => {
-        Frames.belongsTo(models.Providers,
+        Frames.belongsTo(models.Bikeparts,
             {
                 foreignKey: { 
                     allowNull: false }

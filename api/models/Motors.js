@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     Motors.associate = models => {
-        Motors.belongsTo(models.Providers,
+        Motors.belongsTo(models.Bikeparts,
             {
                 foreignKey: { 
                     allowNull: false }
