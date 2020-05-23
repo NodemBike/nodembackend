@@ -19,7 +19,10 @@ module.exports = (sequelize, Sequelize) => {
     Warranties.associate = models => {
         Warranties.belongsTo(models.Bikes,
             {
-                foreignKey: { allowNull: false }
+                foreignKey: {
+                    allowNull: false,
+                    unique: true
+                }
             });
     };
     return Warranties;

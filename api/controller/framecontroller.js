@@ -18,7 +18,10 @@ exports.create = (req, res) => {
         price: req.body.price,
         date_of_production: req.body.date_of_production,
         image: req.body.image,
-        providerUuid: req.body.providerUuid
+        providerUuid: req.body.providerUuid,
+        stateUuid: req.body.stateUuid,
+        bikeUuid: req.body.bikeUuid
+        
     };
 
     // Save User in the database

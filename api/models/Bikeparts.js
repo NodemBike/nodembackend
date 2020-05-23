@@ -14,11 +14,12 @@ module.exports = (sequelize, Sequelize) => {
 
     });
 
-    Bikeparts.associate = models => {
+    /*Bikeparts.associate = models => {
         Bikeparts.belongsTo(models.Bikes,
             {
                 foreignKey: {
-                    allowNull: false
+                    allowNull: false,
+                    constraints: true
                 }
             });
         Bikeparts.hasOne(models.Frames,
@@ -45,7 +46,7 @@ module.exports = (sequelize, Sequelize) => {
             {
                 onDelete: "cascade"
             });
-    };
+    };*/
 
     return Bikeparts;
 

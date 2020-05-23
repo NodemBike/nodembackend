@@ -6,7 +6,7 @@ module.exports = {
     database: process.env.DB,
     dialect: process.env.DIALECT,
     port: process.env.PGPORT,
-    SSL: true,
+    //SSL: true,
     pool: {
         max: 1,
         min: 1,

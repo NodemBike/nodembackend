@@ -17,11 +17,14 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     Models.associate = models => {
-        Models.belongsTo(models.Brands,
+        Models.hasMany(models.Bikes,
             {
-                foreignKey: { 
-                    allowNull: false }
+                foreignKey: {
+                    allowNull: false
+                }
             });
-        }
+    }
+    
+    
     return Models;
 }

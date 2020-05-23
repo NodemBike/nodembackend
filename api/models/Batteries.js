@@ -28,10 +28,11 @@ module.exports = (sequelize, Sequelize) => {
 
         });
     Batteries.associate = models => {
-        Batteries.belongsTo(models.Bikeparts,
+        Batteries.belongsTo(models.Bikes,
             {
                 foreignKey: {
-                    allowNull: false
+                    allowNull: false,
+                    unique: true
                 }
             });
     }

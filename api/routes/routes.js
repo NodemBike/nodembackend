@@ -37,6 +37,7 @@ router.get("/users", users.findAll);
 // Retrieve all Tutorials
 router.get("/getusers", users.getUsers);
 router.get("/bikes", bikes.findAll);
+router.post("/findone", users.findOne);
 router.get("/getbikes", bikes.getBikes);
 router.get("/getbikeparts", bikeparts.getBikeparts);
 router.get("/frame", frame.getFrame);

@@ -17,9 +17,9 @@ app.get("/", (req, res) => {
 });
 
 // db
-db.sequelize.sync(/*{ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
     console.log("Drop and re-sync db.");
-}*/);
+});
 
 const router = require('./api/routes/routes');
 app.use('/api',router);

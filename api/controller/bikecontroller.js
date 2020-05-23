@@ -16,6 +16,8 @@ exports.create = (req, res) => {
     // Create a User
     const bike = {
         userUuid: req.body.userUuid,
+        modelUuid: req.body.modelUuid,
+        sateUuid: req.body.sateUuid
     };
 
     // Save User in the database

@@ -46,10 +46,10 @@ exports.login = (req, res) => {
             password: req.body.password,
         }
     }).then(user => {
-        if(user){
-        res.status(200).send(user);
-        //print(user.body);
-        }else{
+        if (user) {
+            res.status(200).send(user);
+            print(user.body);
+        } else {
             res.status(404).send({
                 message: " Error while trying to login a user"
             });
@@ -75,24 +75,20 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.getOnlyUser = (req, res) => Users.findAll()
-    .then(allUsers => res.send(allUsers));
+// Get only users without the relations
+exports.getOnlyUser = (req, res) => Users.findAll().then(allUsers => res.send(allUsers));
 
-exports.getUsers = (req, res) => Users.findAll(
-    {
+exports.getUsers = (req, res) => Users.findAll({ include: [{ all: true, nested: true }] }).then(allUsers => res.send(allUsers));
+
+// Find a single User with all the realtions using a uuid
+exports.findOne = (req, res) => {
+    const uuid = req.body.uuid;
+
+    Users.findByPk(uuid, {
         include:
             [{ all: true, nested: true }
             ]
-    }
-
-)
-    .then(allUsers => res.send(allUsers));
-
-// Find a single User with an uuid
-exports.findOne = (req, res) => {
-    const uuid = req.params.uuid;
-
-    Users.findByPk(uuid)
+    })
         .then(data => {
             res.send(data);
         })

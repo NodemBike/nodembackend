@@ -5,12 +5,12 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
     host: dbConfig.host,
     dialect: dbConfig.dialect,
-    dialectOptions: {
+    /*dialectOptions: {
         encrypt: true,
         ssl: {
             "require": false
         } 
-    },///uncomment for Azure db connection
+    },///uncomment for Azure db connection*/
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
@@ -47,32 +47,6 @@ Project.hasOne(User)
 In this example hasOne will add an attribute projectId to the User model!
 
 */
-
-// Bike relations
-// db.Brands.hasMany(db.Models); //Bike 
-// db.Bikes.hasOne(db.Models);
-// db.Types.hasMany(db.Bikes);
-// db.States.hasMany(db.Bikes);
-// db.Warranties.belongsTo(db.Bikes);
-
-
-// //Providers
-// db.Providers.hasMany(db.Forks);
-// db.Providers.hasMany(db.RWheels);
-// db.Providers.hasMany(db.FWheels);
-// db.Providers.hasMany(db.Batteries);
-// db.Providers.hasMany(db.Motors);
-// db.Providers.hasMany(db.Frames); 
-
-// // Bike Parts
-// db.Forks.belongsTo(db.Bikeparts);
-// db.RWheels.belongsTo(db.Bikeparts);
-// db.FWheels.belongsTo(db.Bikeparts);
-// db.Batteries.belongsTo(db.Bikeparts);
-// db.Motors.belongsTo(db.Bikeparts);
-// db.Frames.belongsTo(db.Bikeparts, {as: 'frames'});
-
-
 
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
