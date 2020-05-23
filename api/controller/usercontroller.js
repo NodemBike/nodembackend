@@ -48,7 +48,7 @@ exports.login = (req, res) => {
     }).then(user => {
         if(user){
         res.status(200).send(user);
-        print(user.body);
+        //print(user.body);
         }else{
             res.status(404).send({
                 message: " Error while trying to login a user"
@@ -69,7 +69,6 @@ exports.findAll = (req, res) => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            header: "sdfa",
             message:
                 err.message || "Some error occurred while retrieving Users."
         });

@@ -5,16 +5,15 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
     host: dbConfig.host,
     dialect: dbConfig.dialect,
-    /*dialectOptions: {
-        //encrypt: true,
+    dialectOptions: {
+        encrypt: true,
         ssl: {
             "require": false
         } 
-    },*///uncomment for Azure db connection
+    },///uncomment for Azure db connection
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
-        acquire: dbConfig.acquire,
         idle: dbConfig.idle,
     },
 });
