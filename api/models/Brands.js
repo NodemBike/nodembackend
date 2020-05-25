@@ -2,9 +2,9 @@ module.exports = (sequelize, Sequelize) => {
 
     const Brands = sequelize.define("brands",
         {
-            uuid: {
-                type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIDV4,
+            id: {
+                type: Sequelize.INTEGER,
+                autoIncrement: true,
                 primaryKey: true
             },
             name: {

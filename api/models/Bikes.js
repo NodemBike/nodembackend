@@ -7,6 +7,15 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            frameid: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+            name: {
+                type: Sequelize.STRING,
+                allowNull: false,
+
+            },
             image: {
                 type: Sequelize.STRING,
             },
@@ -55,6 +64,7 @@ module.exports = (sequelize, Sequelize) => {
                 onDelete: "cascade",
                 unique: true
             });
+            
             
     };
 

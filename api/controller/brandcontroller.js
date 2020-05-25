@@ -32,23 +32,13 @@ exports.create = (req, res) => {
 
 };
 
-// Retrieve all Users from the database.
-exports.getRwheel = (req, res) => {
-    const name = req.query.name;
-    var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
-
-    Brands.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Users."
-            });
-        });
-};
-
+// Retrieve all Brands from the database.
+exports.getBrands = (req, res) => Brands.findAll({
+    include: [
+        { model: db.Models}
+    ]
+}
+).then(allBikes => res.send(allBikes));
 // Find a single User with an uuid
 exports.findOne = (req, res) => {
     const uuid = req.params.uuid;

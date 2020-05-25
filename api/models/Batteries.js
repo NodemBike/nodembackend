@@ -8,6 +8,10 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            name: {
+                type: Sequelize.STRING,
+                defaultValue: "Battery",
+            },
             price: {
                 type: Sequelize.INTEGER,
                 allowNull: false,

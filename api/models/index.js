@@ -1,22 +1,28 @@
 'use strict'
 
-const dbConfig = require("../config/db.config.js");
+const {production, host} = require("../config/db.config.js");
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
-    host: dbConfig.host,
-    dialect: dbConfig.dialect,
-    /*dialectOptions: {
+
+const sequelize = new Sequelize(production.database, production.user, production.password, {
+    host: production.host,
+    dialect: production.dialect,
+    dialectOptions: {
         encrypt: true,
         ssl: {
             "require": false
         } 
-    },///uncomment for Azure db connection*/
+    },///uncomment for Azure db connection
     pool: {
-        max: dbConfig.pool.max,
-        min: dbConfig.pool.min,
-        idle: dbConfig.idle,
+        max: production.pool.max,
+        min: production.pool.min,
+        idle: production.idle,
     },
 });
+
+/*const sequelize = new Sequelize(host.database, host.user, host.password, {
+    host: host.host,
+    dialect: host.dialect,
+});*/
 
 const db = {} ;
 
@@ -35,7 +41,7 @@ db.Forks = require("./Forks.js")(sequelize, Sequelize);
 db.Motors = require("./Motors.js")(sequelize, Sequelize);
 db.Batteries = require("./Batteries.js")(sequelize, Sequelize);
 db.Frames = require("./Frames.js")(sequelize, Sequelize);
-db.Bikeparts = require("./Bikeparts.js")(sequelize, Sequelize);
+//db.Bikeparts = require("./Bikeparts.js")(sequelize, Sequelize);
 db.Bikes = require("./Bikes.js")(sequelize, Sequelize);
 db.Users = require("./Users.js")(sequelize, Sequelize);
 
@@ -54,5 +60,4 @@ Object.keys(db).forEach(modelName => {
     }
 });
 
-db.Bikes.sync();
 module.exports = db;

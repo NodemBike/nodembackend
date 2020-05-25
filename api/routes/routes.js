@@ -32,17 +32,20 @@ router.post("/newmodel", model.create);
 router.post("/newstate", state.create);
 router.post("/newprovider", provider.create);
 
-// Retrieve all Tutorials
-router.get("/users", users.findAll);
-// Retrieve all Tutorials
-router.get("/getusers", users.getUsers);
-router.get("/bikes", bikes.findAll);
+// Retrieve Methdods
+router.get("/users", users.findAll); // this one only retrieve the users without the nestes models 
+router.get("/getusers", users.getUsers); // all users with include all
 router.post("/findone", users.findOne);
-router.get("/getbikes", bikes.getBikes);
-router.get("/getbikeparts", bikeparts.getBikeparts);
-router.get("/frame", frame.getFrame);
-router.get("/getonlyusers", users.getOnlyUser);
 
+router.get("/bikes", bikes.findAll);
+router.get("/getbikes", bikes.getBikes);
+
+//router.get("/getbikeparts", bikeparts.getBikeparts);
+router.get("/frame", frame.getFrame);
+router.get("/brands", brand.getBrands);
+router.get("/providers", provider.findAll);
+router.get("/states", state.findAll);
+router.get("/warranties", warranty.findAll);
 //
 router.get('/test', (req, res) => res.send("tet"));
 

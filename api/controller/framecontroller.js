@@ -15,12 +15,13 @@ exports.create = (req, res) => {
 
     // Create a User
     const part = {
+        name: req.body.name,
         price: req.body.price,
         date_of_production: req.body.date_of_production,
         image: req.body.image,
-        providerUuid: req.body.providerUuid,
-        stateUuid: req.body.stateUuid,
-        bikeUuid: req.body.bikeUuid
+        providerId: req.body.providerId,
+        stateId: req.body.stateId,
+        bikeUuid: req.body.bikeUuid,
         
     };
 

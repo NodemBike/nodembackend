@@ -15,9 +15,11 @@ exports.create = (req, res) => {
 
     // Create a User
     const bike = {
+        frameid: req.body.frameid,
+        name: req.body.name,
         userUuid: req.body.userUuid,
-        modelUuid: req.body.modelUuid,
-        sateUuid: req.body.sateUuid
+        modelId: req.body.modelId,
+        stateId: req.body.stateId,
     };
 
     // Save User in the database
@@ -51,11 +53,12 @@ exports.findAll = (req, res) => {
         });
 };
 
-exports.getBikes = (req, res) => Bikes.findAll({ 
+exports.getBikes = (req, res) => Bikes.findAll({
     include: [
-        { all:true, nested:true }
-    ]}
-    ).then(allBikes => res.send(allBikes));
+        { all: true, nested: true }
+    ]
+}
+).then(allBikes => res.send(allBikes));
 
 // Find a single User with an uuid
 exports.findOne = (req, res) => {

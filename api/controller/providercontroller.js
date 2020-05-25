@@ -33,22 +33,13 @@ exports.create = (req, res) => {
 
 };
 
-// Retrieve all Users from the database.
-exports.getRwheel = (req, res) => {
-    const name = req.query.name;
-    var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
+// Get  all providers
+exports.findAll = (req, res) => Providers.findAll().then(allProviders => res.send(allProviders)).catch(err => {
+    res.status(500).send({
+        message: err.message || "Some error occurred while retrieving Users."
+    })
+});
 
-    Providers.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Users."
-            });
-        });
-};
 
 // Find a single User with an uuid
 exports.findOne = (req, res) => {

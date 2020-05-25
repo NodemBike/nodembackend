@@ -27,7 +27,7 @@ exports.create = (req, res) => {
     // Save User in the database
     Users.create(user)
         .then(data => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -44,11 +44,14 @@ exports.login = (req, res) => {
         where: {
             email: req.body.email,
             password: req.body.password,
-        }
+        },
+        include:
+            [{ all: true, nested: true }
+            ]
     }).then(user => {
         if (user) {
             res.status(200).send(user);
-            print(user.body);
+            //print(user.body);
         } else {
             res.status(404).send({
                 message: " Error while trying to login a user"
@@ -58,27 +61,18 @@ exports.login = (req, res) => {
 
 }
 
-// Retrieve all Users from the database.
-exports.findAll = (req, res) => {
-    const name = req.query.name;
-    var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
-
-    Users.findAll({
-        where: condition
-    }).then(data => {
-        res.send(data);
-    }).catch(err => {
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving Users."
-        });
-    });
-};
-
 // Get only users without the relations
-exports.getOnlyUser = (req, res) => Users.findAll().then(allUsers => res.send(allUsers));
+exports.findAll = (req, res) => Users.findAll().then(allUsers => res.send(allUsers)).catch(err => {
+    res.status(500).send({
+        message: err.message || "Some error occurred while retrieving Users."
+    })
+});
 
-exports.getUsers = (req, res) => Users.findAll({ include: [{ all: true, nested: true }] }).then(allUsers => res.send(allUsers));
+exports.getUsers = (req, res) => Users.findAll({ include: [{ all: true, nested: true }] }).then(allUsers => res.send(allUsers)).catch(err => {
+    res.status(500).send({
+        message: err.message || "Some error occurred while retrieving Users."
+    })
+});
 
 // Find a single User with all the realtions using a uuid
 exports.findOne = (req, res) => {
