@@ -52,33 +52,44 @@ exports.getFrame = (req, res) => {
         });
 };
 
-// Find a single User with an uuid
+// Find a single frame with an uuid
 exports.findOne = (req, res) => {
-    const uuid = req.params.uuid;
-
-    Tutorial.findByPk(uuid)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Tutorial with id=" + uuid
-            });
-        });
+    Frames.findOne({
+        where: { uuid: req.params.uuid }
+    })
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
 };
 
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
-
+    Frames.update(
+        {
+            name: req.body.name,
+            price: req.body.price,
+            date_of_production: req.body.date_of_production,
+            image: req.body.image,
+            providerId: req.body.providerId,
+            stateId: req.body.stateId,
+            bikeUuid: req.body.bikeUuid
+        },
+        { where: { uuid: req.params.uuid } }
+    )
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-
-};
-
-// Delete all users from the database.
-exports.deleteAll = (req, res) => {
-
+    Frames.findOne({where: {uuid: req.params.uuid}})
+    .then(
+        data => {
+            data.destroy();
+            res.redirect('/api/getbikes');
+        }
+    )
+    .catch(err => {
+        console.log(err)
+    })
 };
 

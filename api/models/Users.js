@@ -12,6 +12,13 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+<<<<<<< Updated upstream
+=======
+            password: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+>>>>>>> Stashed changes
             last_name: {
                 type: Sequelize.STRING,
                 allowNull: false,

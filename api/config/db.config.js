@@ -14,4 +14,16 @@ module.exports = {
     }
 };
 
+<<<<<<< Updated upstream
+=======
+module.exports.host = {
+    host: "localhost",
+    user: "postgres",
+    password: "Marilo321s.",
+    database: "nodemv",
+    port: 5432,
+    dialect: 'postgres'
+};
+
+>>>>>>> Stashed changes
 

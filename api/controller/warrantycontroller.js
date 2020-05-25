@@ -50,32 +50,40 @@ exports.getWarranty = (req, res) => {
         });
 };
 
-// Find a single User with an uuid
+// Find a single warranty with an uuid
 exports.findOne = (req, res) => {
-    const uuid = req.params.uuid;
-
-    Tutorial.findByPk(uuid)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Tutorial with id=" + uuid
-            });
-        });
+    RWheels.findOne({
+        where: { uuid: req.params.uuid }
+    })
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
-
+    Brands.update(
+        {
+            name: req.body.name,
+            bikeUuid: req.body.bikeUuid
+        },
+        { where: { uuid: req.params.uuid } }
+    )
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
 };
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-
+    Warranties.findOne({where: {uuid: req.params.uuid}})
+    .then(
+        data => {
+            data.destroy();
+            res.redirect('/api/bikes');
+        }
+    )
+    .catch(err => {
+        console.log(err)
+    })
 };
 
-// Delete all users from the database.
-exports.deleteAll = (req, res) => {
 
-};

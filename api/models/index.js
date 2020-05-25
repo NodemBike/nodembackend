@@ -2,6 +2,7 @@
 
 const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
+<<<<<<< Updated upstream
 const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
     host: dbConfig.host,
     dialect: dbConfig.dialect,
@@ -17,6 +18,28 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.passw
         acquire: dbConfig.acquire,
         idle: dbConfig.idle,
     },
+=======
+
+// const sequelize = new Sequelize(production.database, production.user, production.password, {
+//     host: production.host,
+//     dialect: production.dialect,
+//     // dialectOptions: {
+//     //     encrypt: true,
+//     //     ssl: {
+//     //         "require": false
+//     //     } 
+//     // },///uncomment for Azure db connection
+//     pool: {
+//         max: production.pool.max,
+//         min: production.pool.min,
+//         idle: production.idle,
+//     },
+// });
+
+const sequelize = new Sequelize(host.database, host.user, host.password, {
+    host: host.host,
+    dialect: host.dialect,
+>>>>>>> Stashed changes
 });
 
 const db = {} ;

@@ -33,6 +33,7 @@ exports.create = (req, res) => {
 
 };
 
+<<<<<<< Updated upstream
 // Retrieve all Users from the database.
 exports.getRwheel = (req, res) => {
     const name = req.query.name;
@@ -53,29 +54,62 @@ exports.getRwheel = (req, res) => {
 // Find a single User with an uuid
 exports.findOne = (req, res) => {
     const uuid = req.params.uuid;
+=======
+// Retrieve all Brands from the database.
+exports.getBrands = (req, res) => Brands.findAll({
+    include: [
+        { model: db.Models }
+    ]
+}
+).then(allBikes => res.send(allBikes));
+>>>>>>> Stashed changes
 
-    Tutorial.findByPk(uuid)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Tutorial with id=" + uuid
-            });
-        });
+// Find a single brand with an uuid
+exports.findOne = (req, res) => {
+    Brands.findOne({
+        where: {
+            id: req.params.id,
+            include: [{ all: true, nested: true }
+            ]
+        }
+    })
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
-
+    Brands.update(
+        {
+            name: req.body.name
+        },
+        { where: { id: req.params.id } }
+    )
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-
+    Brands.findOne({ where: { id: req.params.id } })
+        .then(
+            data => {
+                data.destroy();
+                res.redirect('/api/brands');
+            }
+        )
+        .catch(err => {
+            console.log(err)
+        })
 };
 
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
-
+    Brands.destroy(
+        { where: {} }
+    )
+        .then(res.send({ message: "All brands have been deleted" }))
+        .catch(err => {
+            console.log(err)
+        });
 };
