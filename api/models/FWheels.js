@@ -7,6 +7,10 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            name: {
+                type: Sequelize.STRING,
+                defaultValue: "Front wheel",
+            },
             price: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -25,11 +29,13 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     FWheels.associate = models => {
-        FWheels.belongsTo(models.Providers,
+        FWheels.belongsTo(models.Bikes,
             {
-                foreignKey: { 
-                    allowNull: false }
+                foreignKey: {
+                    allowNull: false,
+                    unique:true
+                }
             });
-        }
+    }
     return FWheels;
 }

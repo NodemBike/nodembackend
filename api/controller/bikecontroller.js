@@ -15,18 +15,22 @@ exports.create = (req, res) => {
 
     // Create a Bike
     const bike = {
+        frameid: req.body.frameid,
+        name: req.body.name,
         userUuid: req.body.userUuid,
+        modelId: req.body.modelId,
+        stateId: req.body.stateId,
     };
 
     // Save Bike in the database
     Bikes.create(bike)
         .then(data => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the User."
+                    err.message || "Some error occurred while creating the bike."
             });
         });
 
@@ -39,11 +43,12 @@ exports.findAll = (req, res) => Bikes.findAll().then(allBikes => res.send(allBik
     })
 });
 
-exports.getBikes = (req, res) => Bikes.findAll({ 
+exports.getBikes = (req, res) => Bikes.findAll({
     include: [
-        { all:true, nested:true }
-    ]}
-    ).then(allBikes => res.send(allBikes));
+        { all: true, nested: true }
+    ]
+}
+).then(allBikes => res.send(allBikes));
 
 // Find a single bike with an uuid
 exports.findOne = (req, res) => {

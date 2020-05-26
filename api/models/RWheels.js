@@ -8,6 +8,10 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            name: {
+                type: Sequelize.STRING,
+                defaultValue: "Rear wheel",
+            },
             price: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -26,12 +30,14 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     RWheels.associate = models => {
-        RWheels.belongsTo(models.Providers,
+        RWheels.belongsTo(models.Bikes,
             {
-                foreignKey: { 
-                    allowNull: false }
+                foreignKey: {
+                    allowNull: false,
+                    unique: true
+                }
             });
-        }
+    }
     return RWheels;
 
 }

@@ -2,14 +2,15 @@ module.exports = (sequelize, Sequelize) => {
 
     const Providers = sequelize.define("providers",
         {
-            uuid: {
-                type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIDV4,
+            id: {
+                type: Sequelize.INTEGER,
+                autoIncrement: true,
                 primaryKey: true
             },
             name: {
                 type: Sequelize.STRING,
                 allowNull: false,
+
             },
         }, {
         paranoid: true,
@@ -22,12 +23,12 @@ module.exports = (sequelize, Sequelize) => {
             {
                 onDelete: "cascade"
             });
-        Providers.belongsTo(models.Bikeparts,
+        /*Providers.belongsTo(models.Bikeparts,
             {
                 foreignKey: {
                     allowNull: false
                 }
-            });
+            });*/
         Providers.hasMany(models.Frames,
             {
                 onDelete: "cascade"
@@ -49,6 +50,6 @@ module.exports = (sequelize, Sequelize) => {
                 onDelete: "cascade"
             });
     }
-        return Providers;
-    
+    return Providers;
+
 }

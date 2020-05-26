@@ -8,6 +8,9 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            name:{
+                type: Sequelize.STRING,
+            },
             price: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -26,12 +29,15 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     Frames.associate = models => {
-        Frames.belongsTo(models.Providers,
+        Frames.belongsTo(models.Bikes,
             {
-                foreignKey: { 
-                    allowNull: false }
+                foreignKey: {
+                    allowNull: false,
+                    unique: true
+                }
             });
-        }
+            
+    }
     return Frames;
 
 }

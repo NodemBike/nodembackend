@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     // Create a User
     const user = {
         name: req.body.name,
+        password: req.body.password,
         last_name: req.body.last_name,
         user_name: req.body.user_name,
         email: req.body.email,
@@ -26,7 +27,7 @@ exports.create = (req, res) => {
     // Save User in the database
     Users.create(user)
         .then(data => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -37,50 +38,57 @@ exports.create = (req, res) => {
 
 };
 
-// Retrieve all Users from the database.
-exports.findAll = (req, res) => {
-    const name = req.query.name;
-    var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
+exports.login = (req, res) => {
 
-    Users.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Users."
-            });
-        });
-};
-
-exports.getOnlyUser = (req, res) => Users.findAll()
-    .then(allUsers => res.send(allUsers));
-
-exports.getUsers = (req, res) => Users.findAll(
-    {include:
-            [{ all:true, nested:true }
+    Users.findOne({
+        where: {
+            email: req.body.email,
+            password: req.body.password,
+        },
+        include:
+            [{ all: true, nested: true }
             ]
-    }
+    }).then(user => {
+        if (user) {
+            res.status(200).send(user);
+            //print(user.body);
+        } else {
+            res.status(404).send({
+                message: " Error while trying to login a user"
+            });
+        }
+    });
 
-<<<<<<< Updated upstream
-)
-    .then(allUsers => res.send(allUsers));
-=======
-// Get users with relations
+}
+
+// Get only users without the relations
+exports.findAll = (req, res) => Users.findAll().then(allUsers => res.send(allUsers)).catch(err => {
+    res.status(500).send({
+        message: err.message || "Some error occurred while retrieving Users."
+    })
+});
+
+
+).then(allUsers => res.send(allUsers));
+
 exports.getUsers = (req, res) => Users.findAll({ include: [{ all: true, nested: true }] }).then(allUsers => res.send(allUsers)).catch(err => {
     res.status(500).send({
         message: err.message || "Some error occurred while retrieving Users."
     })
 });
->>>>>>> Stashed changes
 
-// Find a single User with an uuid
+
+
+// Find a single User with all the realtions using a uuid
 exports.findOne = (req, res) => {
-<<<<<<< Updated upstream
-    const uuid = req.params.uuid;
+    const uuid = req.body.uuid;
 
-    Tutorial.findByPk(uuid)
+
+    Users.findByPk(uuid, {
+        include:
+            [{ all: true, nested: true }
+            ]
+    })
         .then(data => {
             res.send(data);
         })
@@ -89,17 +97,7 @@ exports.findOne = (req, res) => {
                 message: "Error retrieving Tutorial with id=" + uuid
             });
         });
-=======
-    Users.findOne({
-        where: { uuid: req.params.uuid },
-        include: [{ all: true, nested: true }
-        ]
-    })
-    .then(data => res.send(data))
-    .catch(err => console.log(err));
->>>>>>> Stashed changes
-};
-
+  
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
     Users.update(

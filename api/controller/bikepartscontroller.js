@@ -15,7 +15,7 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create a User
+    // Create a bikeparts
     const bike = {
         bikeUuid: req.body.bikeUuid,
     };

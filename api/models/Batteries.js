@@ -8,6 +8,10 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            name: {
+                type: Sequelize.STRING,
+                defaultValue: "Battery",
+            },
             price: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -20,20 +24,22 @@ module.exports = (sequelize, Sequelize) => {
             image: {
                 type: Sequelize.STRING,
             },
-            
+
         },
         {
             paranoid: true,
             underscored: true
 
         });
-        Batteries.associate = models => {
-            Batteries.belongsTo(models.Providers,
-                {
-                    foreignKey: { 
-                        allowNull: false }
-                });
-            }
+    Batteries.associate = models => {
+        Batteries.belongsTo(models.Bikes,
+            {
+                foreignKey: {
+                    allowNull: false,
+                    unique: true
+                }
+            });
+    }
     return Batteries;
 
 }

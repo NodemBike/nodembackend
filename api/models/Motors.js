@@ -7,6 +7,10 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            name: {
+                type: Sequelize.STRING,
+                defaultValue: "Motor",
+            },
             price: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
@@ -25,11 +29,14 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     Motors.associate = models => {
-        Motors.belongsTo(models.Providers,
+        Motors.belongsTo(models.Bikes,
             {
                 foreignKey: { 
-                    allowNull: false }
+                    allowNull: false,
+                    unique: true,
+                }
             });
+            
         }
     return Motors;
 

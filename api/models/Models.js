@@ -2,9 +2,9 @@ module.exports = (sequelize, Sequelize) => {
 
     const Models = sequelize.define("models",
         {
-            uuid: {
-                type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIDV4,
+            id: {
+                type: Sequelize.INTEGER,
+                autoIncrement: true,
                 primaryKey: true
             },
             name: {
@@ -17,11 +17,14 @@ module.exports = (sequelize, Sequelize) => {
 
     });
     Models.associate = models => {
-        Models.belongsTo(models.Brands,
+        Models.hasMany(models.Bikes,
             {
-                foreignKey: { 
-                    allowNull: false }
+                foreignKey: {
+                    allowNull: false
+                }
             });
-        }
+    }
+    
+    
     return Models;
 }

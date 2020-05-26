@@ -33,22 +33,13 @@ exports.create = (req, res) => {
 
 };
 
-// Retrieve all Users from the database.
-exports.getWarranty = (req, res) => {
-    const name = req.query.name;
-    var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
+// Get  all providers
+exports.findAll = (req, res) => Providers.findAll().then(allProviders => res.send(allProviders)).catch(err => {
+    res.status(500).send({
+        message: err.message || "Some error occurred while retrieving the Warranties."
+    })
+});
 
-    Warranties.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Users."
-            });
-        });
-};
 
 // Find a single warranty with an uuid
 exports.findOne = (req, res) => {
@@ -59,6 +50,10 @@ exports.findOne = (req, res) => {
         .catch(err => console.log(err));
 };
 
+// Find a single User with an uuid
+exports.finByBikeId = (req, res) => {
+
+};
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
     Brands.update(

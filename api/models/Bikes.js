@@ -7,6 +7,15 @@ module.exports = (sequelize, Sequelize) => {
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
             },
+            frameid: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+            name: {
+                type: Sequelize.STRING,
+                allowNull: false,
+
+            },
             image: {
                 type: Sequelize.STRING,
             },
@@ -20,22 +29,49 @@ module.exports = (sequelize, Sequelize) => {
             {
                 foreignKey: { allowNull: false }
             });
-        Bikes.hasOne(models.Bikeparts,
-            {
-                onDelete: "cascade"
-            });
         Bikes.hasOne(models.Warranties,
             {
-                onDelete: "cascade"
+                onDelete: "cascade",
+                unique: true
             });
-        Bikes.hasOne(models.Brands,
+        Bikes.hasOne(models.Frames,
             {
-                onDelete: "cascade"
+                onDelete: "cascade",
+                unique: true
             });
-        Bikes.hasOne(models.States,
+        Bikes.hasOne(models.Forks,
             {
-                onDelete: "cascade"
+                onDelete: "cascade",
+                unique: true
             });
+        Bikes.hasOne(models.Batteries,
+            {
+                onDelete: "cascade",
+                unique: true
+            });
+        Bikes.hasOne(models.Motors,
+            {
+                onDelete: "cascade",
+                unique: true
+            });
+        Bikes.hasOne(models.RWheels,
+            {
+                onDelete: "cascade",
+                unique: true
+            });
+        Bikes.hasOne(models.FWheels,
+            {
+                onDelete: "cascade",
+                unique: true
+            });
+        Bikes.hasMany(models.Records,
+            {
+                onDelete: "cascade",
+            });
+            
+            
     };
+
+
     return Bikes;
 }

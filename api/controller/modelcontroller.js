@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     // Create a User
     const part = {
         name: req.body.name,
-        brandUuid: req.body.brandUuid
+        brandId: req.body.brandId
     };
 
     // Save User in the database

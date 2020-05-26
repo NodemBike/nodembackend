@@ -14,44 +14,39 @@ module.exports = (sequelize, Sequelize) => {
 
     });
 
-    Bikeparts.associate = models => {
+    /*Bikeparts.associate = models => {
         Bikeparts.belongsTo(models.Bikes,
             {
                 foreignKey: {
-                    allowNull: false
+                    allowNull: false,
+                    constraints: true
                 }
             });
-    };
-    Bikeparts.associate = models => {
-        Bikeparts.hasMany(models.Providers,
+        Bikeparts.hasOne(models.Frames,
             {
                 onDelete: "cascade"
             });
-        // Bikeparts.hasOne(models.Frames,
-        //     {
-        //         onDelete: "cascade"
-        //     });
-        // Bikeparts.hasOne(models.Forks,
-        //     {
-        //         onDelete: "cascade"
-        //     });
-        // Bikeparts.hasOne(models.FWheels,
-        //     {
-        //         onDelete: "cascade"
-        //     });
-        // Bikeparts.hasOne(models.RWheels,
-        //     {
-        //         onDelete: "cascade"
-        //     });
-        // Bikeparts.hasOne(models.Motors,
-        //     {
-        //         onDelete: "cascade"
-        //     });
-        // Bikeparts.hasOne(models.Batteries,
-        //     {
-        //         onDelete: "cascade"
-        //     });
-    };
+        Bikeparts.hasOne(models.Forks,
+            {
+                onDelete: "cascade"
+            });
+        Bikeparts.hasOne(models.FWheels,
+            {
+                onDelete: "cascade"
+            });
+        Bikeparts.hasOne(models.RWheels,
+            {
+                onDelete: "cascade"
+            });
+        Bikeparts.hasOne(models.Motors,
+            {
+                onDelete: "cascade"
+            });
+        Bikeparts.hasOne(models.Batteries,
+            {
+                onDelete: "cascade"
+            });
+    };*/
 
     return Bikeparts;
 
