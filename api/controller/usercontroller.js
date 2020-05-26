@@ -1,6 +1,6 @@
 const db = require("../models");
 const Users = db.Users;
-const States = db.States;
+const Op = db.Sequelize.Op;
 
 //Create and Save a new User
 exports.create = (req, res) => {
@@ -68,21 +68,15 @@ exports.findAll = (req, res) => Users.findAll().then(allUsers => res.send(allUse
     })
 });
 
-
-).then(allUsers => res.send(allUsers));
-
 exports.getUsers = (req, res) => Users.findAll({ include: [{ all: true, nested: true }] }).then(allUsers => res.send(allUsers)).catch(err => {
     res.status(500).send({
         message: err.message || "Some error occurred while retrieving Users."
     })
 });
 
-
-
 // Find a single User with all the realtions using a uuid
 exports.findOne = (req, res) => {
     const uuid = req.body.uuid;
-
 
     Users.findByPk(uuid, {
         include:
@@ -97,47 +91,20 @@ exports.findOne = (req, res) => {
                 message: "Error retrieving Tutorial with id=" + uuid
             });
         });
-  
+};
+
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
-    Users.update(
-        {
-            name: req.body.name,
-            password: req.body.password,
-            last_name: req.body.last_name,
-            user_name: req.body.user_name,
-            email: req.body.email,
-            id_doc: req.body.id_doc,
-            phone: req.body.phone
-        },
-        { where: { uuid: req.params.uuid } }
-    )
-        .then(data => res.send(data))
-        .catch(err => console.log(err));
+
 };
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    Users.findOne({ where: { uuid: req.params.uuid } })
-        .then(
-            data => {
-                data.destroy();
-                res.redirect('/api/users');
-            }
-        )
-        .catch(err => {
-            console.log(err)
-        })
+
 };
 
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
-    Users.destroy(
-        { where: {} }
-    )
-        .then(res.send({ message: "All users have been deleted" }))
-        .catch(err => {
-            console.log(err)
-        });
+
 };
 

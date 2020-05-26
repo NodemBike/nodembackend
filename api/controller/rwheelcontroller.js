@@ -55,45 +55,32 @@ exports.getRwheel = (req, res) => {
         });
 };
 
-// Find a single rwheel with an uuid
+// Find a single User with an uuid
 exports.findOne = (req, res) => {
-    RWheels.findOne({
-        where: { uuid: req.params.uuid }
-    })
-        .then(data => res.send(data))
-        .catch(err => console.log(err));
+    const uuid = req.params.uuid;
+
+    Tutorial.findByPk(uuid)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Tutorial with id=" + uuid
+            });
+        });
 };
 
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
-    RWheels.update(
-        {
-            name: req.body.name,
-            price: req.body.price,
-            date_of_production: req.body.date_of_production,
-            image: req.body.image,
-            providerId: req.body.providerId,
-            stateId: req.body.stateId,
-            bikeUuid: req.body.bikeUuid
-        },
-        { where: { uuid: req.params.uuid } }
-    )
-        .then(data => res.send(data))
-        .catch(err => console.log(err));
+
 };
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    RWheels.findOne({where: {uuid: req.params.uuid}})
-    .then(
-        data => {
-            data.destroy();
-            res.redirect('/api/getbikes');
-        }
-    )
-    .catch(err => {
-        console.log(err)
-    })
+
 };
 
+// Delete all users from the database.
+exports.deleteAll = (req, res) => {
 
+};
