@@ -30,6 +30,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // adding the models to the db
+db.Records = require("./Records.js")(sequelize, Sequelize);
 db.Providers = require("./Providers.js")(sequelize, Sequelize);
 db.States = require("./States.js")(sequelize, Sequelize);
 db.Warranties = require("./Warranties.js")(sequelize, Sequelize);
@@ -59,5 +60,5 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
-
+db.Bikes.sync();
 module.exports = db;

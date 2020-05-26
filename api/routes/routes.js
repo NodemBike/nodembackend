@@ -13,12 +13,14 @@ const brand = require("../controller/brandcontroller");
 const model = require("../controller/modelcontroller");
 const state = require("../controller/statecontroller");
 const provider = require("../controller/providercontroller");
+const records = require("../controller/recordscontroller");
 
 var router = require("express").Router();
 
 // Create methods
 router.post("/newuser", users.create);
 router.post("/newbike", bikes.create);
+
 router.post("/newbikeparts", bikeparts.create);
 router.post("/newframe", frame.create);
 router.post("/newfork", fork.create);
@@ -51,6 +53,11 @@ router.get('/test', (req, res) => res.send("tet"));
 
 // Login
 router.post('/login', users.login);
+
+//Records
+router.post("/newrecord",records.create);
+router.get("/getrecords", records.getRecords);
+router.post("/getrecordsbyuserid", records.getRecordsByUserUUID);
 
 
 module.exports = router;

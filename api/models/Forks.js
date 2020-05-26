@@ -9,7 +9,6 @@ module.exports = (sequelize, Sequelize) => {
             },
             name: {
                 type: Sequelize.STRING,
-                defaultValue: "Fork",
             },
             price: {
                 type: Sequelize.INTEGER,

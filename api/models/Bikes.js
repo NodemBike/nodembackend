@@ -64,6 +64,10 @@ module.exports = (sequelize, Sequelize) => {
                 onDelete: "cascade",
                 unique: true
             });
+        Bikes.hasMany(models.Records,
+            {
+                onDelete: "cascade",
+            });
             
             
     };

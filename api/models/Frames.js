@@ -10,7 +10,6 @@ module.exports = (sequelize, Sequelize) => {
             },
             name:{
                 type: Sequelize.STRING,
-                defaultValue: "frame",
             },
             price: {
                 type: Sequelize.INTEGER,

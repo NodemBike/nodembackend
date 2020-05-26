@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            password:{
+            password: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            email:{
+            email: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
@@ -46,6 +46,10 @@ module.exports = (sequelize, Sequelize) => {
 
     Users.associate = models => {
         Users.hasMany(models.Bikes,
+            {
+                onDelete: "cascade"
+            });
+        Users.hasMany(models.Records,
             {
                 onDelete: "cascade"
             });

@@ -25,12 +25,12 @@ exports.create = (req, res) => {
     // Save User in the database
     Bikes.create(bike)
         .then(data => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the User."
+                    err.message || "Some error occurred while creating the bike."
             });
         });
 
