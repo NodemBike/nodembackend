@@ -8,7 +8,6 @@ const sequelize = new Sequelize(production.database, production.user, production
     dialect: production.dialect,
     dialectOptions: {
         encrypt: true,
-
         ssl: {
             "require": false
         }

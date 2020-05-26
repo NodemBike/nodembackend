@@ -34,19 +34,13 @@ router.post("/newmodel", model.create);
 router.post("/newstate", state.create);
 router.post("/newprovider", provider.create);
 
-
 // Retrieve Methdods
 router.get("/users", users.findAll); // this one only retrieve the users without the nestes models 
 router.get("/getusers", users.getUsers); // all users with include all
-router.get("/users/findone/:uuid", users.findOne);
-router.get("/bikes/findone/:uuid", bikes.findOne);
-router.get("/getonlyusers", users.getOnlyUser);
-
+router.post("/findone", users.findOne);
 
 router.get("/bikes", bikes.findAll);
 router.get("/getbikes", bikes.getBikes);
-router.get("/getbikeparts", bikeparts.getBikeparts);
-router.get("/frame", frame.getFrame);
 
 //router.get("/getbikeparts", bikeparts.getBikeparts);
 router.get("/frame", frame.getFrame);
@@ -56,56 +50,8 @@ router.get("/states", state.findAll);
 router.get("/warranties", warranty.findAll);
 //
 router.get('/test', (req, res) => res.send("tet"));
-router.get("/brands", brand.getBrands);
-router.get("/providers", provider.findAll);
-router.get("/states", state.findAll);
-router.get("/warranties", warranty.findAll);
-
-router.get('/bikesbystate/:stateId', bikes.getByState);
 
 
-// Delete
-router.delete('/users/delete/:uuid', users.delete);
-router.delete('/bikes/delete/:uuid', bikes.delete);
-router.delete('/brand/delete/:id', brand.delete);
-router.delete('/model/delete/:id', model.delete);
-router.delete('/provider/delete/:id', provider.delete);
-router.delete('/warranty/delete/:uuid', warranty.delete);
-router.delete('/frame/delete/:uuid', frame.delete);
-router.delete('/fork/delete/:uuid', fork.delete);
-router.delete('/battery/delete/:uuid', battery.delete);
-router.delete('/fwheel/delete/:uuid', fwheel.delete);
-router.delete('/rwheel/delete/:uuid', rwheel.delete);
-router.delete('/motor/delete/:uuid', motor.delete);
-router.delete('/state/delete/:id', state.delete);
-
-// DeleteAll
-router.delete('/users/deleteall', users.deleteAll);
-router.delete('/bikes/deleteall', bikes.deleteAll);
-router.delete('/brands/deleteall', brand.deleteAll);
-router.delete('/provider/deleteall', provider.deleteAll);
-router.delete('/states/deleteall', state.deleteAll);
-
-// Update
-router.put('/users/update/:uuid', users.update);
-router.put('/bikes/update/:uuid', bikes.update);
-router.put('/frame/update/:uuid', frame.update);
-router.put('/fork/update/:uuid', fork.update);
-router.put('/battery/update/:uuid', battery.update);
-router.put('/fwheel/update/:uuid', fwheel.update);
-router.put('/rwheel/update/:uuid', rwheel.update);
-router.put('/motor/update/:uuid', motor.update);
-router.put('/brand/update/:id', brand.update);
-router.put('/model/update/:id', model.update);
-router.put('/state/update/:id', state.update);
-router.put('/provider/update/:id', provider.update);
-
-
-router.get('/test', (req, res) => res.send("tet"));
-// Login
-router.post('/login', users.login);
-
-//Records
 router.post("/newrecord",records.create);
 router.get("/getrecords", records.getRecords);
 router.post("/getrecordsbyuserid", records.getRecordsByUserUUID);

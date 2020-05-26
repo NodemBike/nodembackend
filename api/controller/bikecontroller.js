@@ -13,7 +13,7 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create a Bike
+    // Create a User
     const bike = {
         frameid: req.body.frameid,
         name: req.body.name,
@@ -22,7 +22,7 @@ exports.create = (req, res) => {
         stateId: req.body.stateId,
     };
 
-    // Save Bike in the database
+    // Save User in the database
     Bikes.create(bike)
         .then(data => {
             res.status(200).send(data);
@@ -36,12 +36,22 @@ exports.create = (req, res) => {
 
 };
 
-// Get only bikes without the relations
-exports.findAll = (req, res) => Bikes.findAll().then(allBikes => res.send(allBikes)).catch(err => {
-    res.status(500).send({
-        message: err.message || "Some error occurred while retrieving Users."
-    })
-});
+// Retrieve all Users from the database.
+exports.findAll = (req, res) => {
+    const name = req.query.name;
+    var condition = name ? { name: { [Op.iLike]: `%${name}%` } } : null;
+
+    Users.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Users."
+            });
+        });
+};
 
 exports.getBikes = (req, res) => Bikes.findAll({
     include: [
@@ -50,64 +60,33 @@ exports.getBikes = (req, res) => Bikes.findAll({
 }
 ).then(allBikes => res.send(allBikes));
 
-// Find a single bike with an uuid
+// Find a single User with an uuid
 exports.findOne = (req, res) => {
-    Bikes.findOne({
-        where: { uuid: req.params.uuid },
-        include: [{ all: true, nested: true }
-        ]
-    })
-    .then(data => res.send(data))
-    .catch(err => console.log(err));
-};
+    const uuid = req.params.uuid;
 
-// Get bikes by state
-exports.getByState = (req,res) => {
-    Bikes.findAll ({ where: { stateId: req.params.stateId } })
-    .then(data => res.send(data))
-    .catch(
-        err => console.error(err)
-    );
-}
+    Tutorial.findByPk(uuid)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Tutorial with id=" + uuid
+            });
+        });
+};
 
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
-    Bikes.update(
-        {
-            frameid: req.body.frameid,
-            name: req.body.name,
-            userUuid: req.body.userUuid,
-            modelId: req.body.modelId,
-            stateId: req.body.stateId,
-        },
-        { where: { uuid: req.params.uuid } }
-    )
-        .then(data => res.send(data))
-        .catch(err => console.log(err));
+
 };
 
-// Delete a Bike with the specified uuid in the request
+// Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    Bikes.findOne({ where: { uuid: req.params.uuid } })
-        .then(
-            data => {
-                data.destroy();
-                res.redirect('/api/bikes');
-            }
-        )
-        .catch(err => {
-            console.log(err)
-        })
+
 };
 
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
-    Bikes.destroy(
-        { where: {} }
-    )
-        .then(res.send({ message: "All bikes have been deleted" }))
-        .catch(err => {
-            console.log(err)
-        });
+
 };
 

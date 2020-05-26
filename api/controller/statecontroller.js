@@ -1,6 +1,6 @@
 const db = require("../models");
 const States = db.States;
-const Users = db.Users;
+const Op = db.Sequelize.Op;
 
 //Create and Save a new User
 exports.create = (req, res) => {
@@ -40,51 +40,32 @@ exports.findAll = (req, res) => States.findAll().then(allStates => res.send(allS
 });
 
 
-// Find a single model with an uuid
+// Find a single User with an uuid
 exports.findOne = (req, res) => {
-    States.findOne({
-        where: { id: req.params.id },
-        include: [{ all: true, nested: true }
-        ]
-    })
-        .then(data => res.send(data))
-        .catch(err => console.log(err));
-};
+    const uuid = req.params.uuid;
 
+    Tutorial.findByPk(uuid)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Tutorial with id=" + uuid
+            });
+        });
+};
 
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
-    States.update(
-        {
-            name: req.body.name
-        },
-        { where: { id: req.params.id } }
-    )
-        .then(data => res.send(data))
-        .catch(err => console.log(err));
+
 };
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    States.findOne({ where: { id: req.params.id } })
-        .then(
-            data => {
-                data.destroy();
-                res.redirect('/api/states');
-            }
-        )
-        .catch(err => {
-            console.log(err)
-        })
+
 };
 
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
-    States.destroy(
-        { where: {} }
-    )
-        .then(res.send({ message: "All states have been deleted" }))
-        .catch(err => {
-            console.log(err)
-        });
+
 };
