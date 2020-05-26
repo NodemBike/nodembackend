@@ -1,6 +1,6 @@
 'use strict'
 
-const {production, host} = require("../config/db.config.js");
+const { production, host } = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(production.database, production.user, production.password, {
@@ -11,20 +11,21 @@ const sequelize = new Sequelize(production.database, production.user, production
 
         ssl: {
             "require": false
-        } 
+        }
     },///uncomment for Azure db connection
     pool: {
         max: production.pool.max,
         min: production.pool.min,
         idle: production.idle,
     },
-  
+});
+
 /*const sequelize = new Sequelize(host.database, host.user, host.password, {
     host: host.host,
     dialect: host.dialect,
 });*/
 
-const db = {} ;
+const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -49,10 +50,10 @@ db.Users = require("./Users.js")(sequelize, Sequelize);
 /* Relations to providers
  BelongsTo associations are associations where the foreign key for the one-to-one relation exists on the source model.
 User.belongsTo(Company); // Will add companyId to user
-
+ 
 Project.hasOne(User)
 In this example hasOne will add an attribute projectId to the User model!
-
+ 
 */
 
 Object.keys(db).forEach(modelName => {
@@ -60,5 +61,6 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 });
+
 db.Bikes.sync();
 module.exports = db;
