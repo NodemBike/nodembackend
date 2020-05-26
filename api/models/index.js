@@ -8,6 +8,7 @@ const sequelize = new Sequelize(production.database, production.user, production
     dialect: production.dialect,
     dialectOptions: {
         encrypt: true,
+
         ssl: {
             "require": false
         } 
@@ -17,8 +18,7 @@ const sequelize = new Sequelize(production.database, production.user, production
         min: production.pool.min,
         idle: production.idle,
     },
-});
-
+  
 /*const sequelize = new Sequelize(host.database, host.user, host.password, {
     host: host.host,
     dialect: host.dialect,
