@@ -109,7 +109,7 @@ router.post('/login', users.login);
 //Records
 router.post("/newrecord",records.create);
 router.get("/getrecords", records.getRecords);
-router.post("/getrecordsbyuserid", records.getRecordsByUserUUID);
+router.get("/getrecordsbyuserid/:userUuid", records.getRecordsByUserUUID);
 
 
 module.exports = router;

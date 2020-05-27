@@ -1,6 +1,6 @@
 const db = require("../models");
 const Users = db.Users;
-const States = db.States;
+const Records = db.Records;
 
 //Create and Save a new User
 exports.create = (req, res) => {
