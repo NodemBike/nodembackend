@@ -66,16 +66,16 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    Providers.findOne({where: {id: req.params.id}})
-    .then(
-        data => {
-            data.destroy();
-            res.redirect('/api/providers');
-        }
-    )
-    .catch(err => {
-        console.log(err)
-    })
+    Providers.findOne({ where: { id: req.params.id } })
+        .then(
+            data => {
+                data.destroy();
+                res.redirect('/api/providers');
+            }
+        )
+        .catch(err => {
+            console.log(err)
+        })
 };
 
 // Delete all users from the database.
@@ -83,8 +83,8 @@ exports.deleteAll = (req, res) => {
     Providers.destroy(
         { where: {} }
     )
-    .then(res.send({message: "All providers have been deleted"}))
-    .catch(err => {
-        console.log(err)
-    });
+        .then(res.send({ message: "All providers have been deleted" }))
+        .catch(err => {
+            console.log(err)
+        });
 };

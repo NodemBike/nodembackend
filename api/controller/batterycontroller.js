@@ -67,8 +67,8 @@ exports.findOne = (req, res) => {
     Batteries.findOne({
         where: { uuid: req.params.uuid }
     })
-    .then(data => res.send(data))
-    .catch(err => console.log(err));
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Update a User by the uuid in the request

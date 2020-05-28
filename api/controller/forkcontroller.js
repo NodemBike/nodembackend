@@ -68,8 +68,8 @@ exports.findOne = (req, res) => {
     Forks.findOne({
         where: { uuid: req.params.uuid }
     })
-    .then(data => res.send(data))
-    .catch(err => console.log(err));
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Update a User by the uuid in the request
@@ -104,35 +104,24 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-<<<<<<< Updated upstream
-    Forks.findOne({where: {uuid: req.params.uuid}})
-    .then(
-        data => {
-            data.destroy();
-            res.redirect('/api/getbikes');
-        }
-    )
-    .catch(err => {
-        console.log(err)
-    })
-=======
     Forks.findOne({ where: { uuid: req.params.uuid } })
         .then(
             data => {
                 data.destroy();
+              
                 Records.create({
                     description: 'Delete',
                     part: data.uuid,
                     types: 'Fork',
                     bikeUuid: data.bikeUuid
                 })
+
                 res.redirect('/api/getbikes');
             }
         )
         .catch(err => {
             console.log(err)
         })
->>>>>>> Stashed changes
 };
 
 

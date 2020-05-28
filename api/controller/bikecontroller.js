@@ -64,17 +64,17 @@ exports.findOne = (req, res) => {
         include: [{ all: true, nested: true }
         ]
     })
-    .then(data => res.send(data))
-    .catch(err => console.log(err));
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Get bikes by state
-exports.getByState = (req,res) => {
-    Bikes.findAll ({ where: { stateId: req.params.stateId } })
-    .then(data => res.send(data))
-    .catch(
-        err => console.error(err)
-    );
+exports.getByState = (req, res) => {
+    Bikes.findAll({ where: { stateId: req.params.stateId } })
+        .then(data => res.status(200).send(data))
+        .catch(
+            err => console.error(err)
+        );
 }
 
 // Update a User by the uuid in the request

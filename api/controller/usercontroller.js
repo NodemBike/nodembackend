@@ -69,8 +69,6 @@ exports.findAll = (req, res) => Users.findAll().then(allUsers => res.send(allUse
 });
 
 
-).then(allUsers => res.send(allUsers));
-
 exports.getUsers = (req, res) => Users.findAll({ include: [{ all: true, nested: true }] }).then(allUsers => res.send(allUsers)).catch(err => {
     res.status(500).send({
         message: err.message || "Some error occurred while retrieving Users."
@@ -78,11 +76,9 @@ exports.getUsers = (req, res) => Users.findAll({ include: [{ all: true, nested: 
 });
 
 
-
 // Find a single User with all the realtions using a uuid
 exports.findOne = (req, res) => {
     const uuid = req.body.uuid;
-
 
     Users.findByPk(uuid, {
         include:
@@ -97,7 +93,8 @@ exports.findOne = (req, res) => {
                 message: "Error retrieving Tutorial with id=" + uuid
             });
         });
-  
+}
+
 // Update a User by the uuid in the request
 exports.update = (req, res) => {
     Users.update(

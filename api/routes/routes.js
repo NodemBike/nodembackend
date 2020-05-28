@@ -20,7 +20,6 @@ var router = require("express").Router();
 // Create methods
 router.post("/newuser", users.create);
 router.post("/newbike", bikes.create);
-
 router.post("/newbikeparts", bikeparts.create);
 router.post("/newframe", frame.create);
 router.post("/newfork", fork.create);
@@ -36,11 +35,10 @@ router.post("/newprovider", provider.create);
 
 
 // Retrieve Methdods
-router.get("/users", users.findAll); // this one only retrieve the users without the nestes models 
+router.get("/getonlyusers", users.findAll); // this one only retrieve the users without the nestes models 
 router.get("/getusers", users.getUsers); // all users with include all
 router.get("/users/findone/:uuid", users.findOne);
 router.get("/bikes/findone/:uuid", bikes.findOne);
-router.get("/getonlyusers", users.getOnlyUser);
 
 
 router.get("/bikes", bikes.findAll);
@@ -102,7 +100,6 @@ router.put('/provider/update/:id', provider.update);
 
 
 router.get('/test', (req, res) => res.send("tet"));
-=======
 // Login
 router.post('/login', users.login);
 

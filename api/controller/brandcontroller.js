@@ -33,16 +33,14 @@ exports.create = (req, res) => {
 };
 
 // Find a single User with an uuid
-exports.findOne = (req, res) => {
-    const uuid = req.params.uuid;
-=======
-// Retrieve all Brands from the database.
+
 exports.getBrands = (req, res) => Brands.findAll({
     include: [
         { model: db.Models }
     ]
 }
 ).then(allBikes => res.send(allBikes));
+
 
 
 // Find a single brand with an uuid
@@ -87,10 +85,5 @@ exports.delete = (req, res) => {
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
     Brands.destroy(
-        { where: {} }
-    )
-        .then(res.send({ message: "All brands have been deleted" }))
-        .catch(err => {
-            console.log(err)
-        });
+        { where: {} }).then(res.send({ message: "All brands have been deleted" })).catch(err => { console.log(err) })
 };

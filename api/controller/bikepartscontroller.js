@@ -50,7 +50,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.getBikeparts = (req, res) => Bikeparts.findAll({
-    include: [{all:true, nested:true }]
+    include: [{ all: true, nested: true }]
 }).then(allBikeparts => res.send(allBikeparts));
 
 // Find a single User with an uuid
