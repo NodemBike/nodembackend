@@ -17,10 +17,10 @@ module.exports.production = {
 module.exports.host = {
     host: "localhost",
     user: "postgres",
-    password: "Ed99Ga99.",
-    database: "nodempgtest",
+    password: "Marilo321s.",
+    database: "nodemv3",
     port: 5432,
-    dialect: process.env.DIALECT
+    dialect: 'postgres'
 };
 
 

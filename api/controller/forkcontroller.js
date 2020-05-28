@@ -1,6 +1,7 @@
 const db = require("../models");
 const Forks = db.Forks;
 const Op = db.Sequelize.Op;
+const Records = db.Records;
 
 //Create and Save a new User
 exports.create = (req, res) => {
@@ -28,7 +29,13 @@ exports.create = (req, res) => {
     // Save User in the database
     Forks.create(part)
         .then(data => {
-            res.send(data);
+            res.status(200).send(data)
+            Records.create({
+                description: 'New',
+                part: data.uuid,
+                types: 'Fork',
+                bikeUuid: data.bikeUuid
+            })
         })
         .catch(err => {
             res.status(500).send({
@@ -77,9 +84,21 @@ exports.update = (req, res) => {
             stateId: req.body.stateId,
             bikeUuid: req.body.bikeUuid
         },
-        { where: { uuid: req.params.uuid } }
+        {
+            where: { uuid: req.params.uuid },
+            returning: true,
+            plain: true
+        }
     )
-        .then(data => res.send(data))
+        .then(data => {
+            res.send(data)
+            Records.create({
+                description: 'Update',
+                part: data[1].uuid,
+                types: 'Fork',
+                bikeUuid: data[1].bikeUuid,
+            })
+        })
         .catch(err => console.log(err));
 };
 
@@ -89,6 +108,14 @@ exports.delete = (req, res) => {
         .then(
             data => {
                 data.destroy();
+              
+                Records.create({
+                    description: 'Delete',
+                    part: data.uuid,
+                    types: 'Fork',
+                    bikeUuid: data.bikeUuid
+                })
+
                 res.redirect('/api/getbikes');
             }
         )
