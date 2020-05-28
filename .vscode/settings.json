@@ -1,5 +1,4 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/cb77ed10-1d74-4474-bc72-c6f227ea6e6f/resourceGroups/nodeapiazureconnection/providers/Microsoft.Web/sites/nodeapiazureconnection",
     "appService.deploySubpath": "",
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",

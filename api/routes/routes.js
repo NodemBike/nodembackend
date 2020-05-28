@@ -46,6 +46,14 @@ router.get("/getbikes", bikes.getBikes);
 router.get("/getbikeparts", bikeparts.getBikeparts);
 router.get("/frame", frame.getFrame);
 
+// getByUUUID
+router.get('/frame/findone/:uuid', frame.findOne);
+router.get('/fork/findone/:uuid', fork.findOne);
+router.get('/battery/findone/:uuid', battery.findOne);
+router.get('/fwheel/findone/:uuid', fwheel.findOne);
+router.get('/rwheel/findone/:uuid', rwheel.findOne);
+router.get('/motor/findone/:uuid', motor.findOne);
+
 //router.get("/getbikeparts", bikeparts.getBikeparts);
 router.get("/frame", frame.getFrame);
 router.get("/brands", brand.getBrands);
