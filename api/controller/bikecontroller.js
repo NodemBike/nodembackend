@@ -31,6 +31,7 @@ exports.create = (req, res) => {
                 description: 'New',
                 part: data.uuid,
                 types: 'Bikes',
+                bikeUuid: data.uuid,
                 userUuid: data.userUuid
             })
         })
@@ -97,7 +98,8 @@ exports.update = (req, res) => {
                 description: 'Update',
                 part: data[1].uuid,
                 types: 'Bikes',
-                userUuid: data[1].userUuid,
+                bikeUuid: data[1].uuid,
+                userUuid: data[1].userUuid
             })
         })
         .catch(err => console.log(err));
@@ -105,7 +107,7 @@ exports.update = (req, res) => {
 
 // Delete a Bike with the specified uuid in the request
 exports.delete = (req, res) => {
-    Bikes.findOne({ where: { uuid: req.params.uuid } })
+    Bikes.findOne({ where: { uuid: req.params.uuid }, force: true })
         .then(
             data => {
                 data.destroy();
@@ -113,6 +115,7 @@ exports.delete = (req, res) => {
                     description: 'Delete',
                     part: data.uuid,
                     types: 'Bikes',
+                    bikeUuid: data.uuid,
                     userUuid: data.userUuid
                 })
                 res.redirect('/api/bikes');
@@ -126,8 +129,10 @@ exports.delete = (req, res) => {
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
     Bikes.destroy(
-        { where: {} }
-    )
+        {
+            where: {},
+            force: true
+        })
         .then(res.send({ message: "All bikes have been deleted" }))
         .catch(err => {
             console.log(err)

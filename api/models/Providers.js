@@ -19,36 +19,18 @@ module.exports = (sequelize, Sequelize) => {
     });
 
     Providers.associate = models => {
-        Providers.hasMany(models.Forks,
-            {
-                onDelete: "cascade"
-            });
+        Providers.hasMany(models.Forks);
         /*Providers.belongsTo(models.Bikeparts,
             {
                 foreignKey: {
                     allowNull: false
                 }
             });*/
-        Providers.hasMany(models.Frames,
-            {
-                onDelete: "cascade"
-            });
-        Providers.hasMany(models.FWheels,
-            {
-                onDelete: "cascade"
-            });
-        Providers.hasMany(models.Motors,
-            {
-                onDelete: "cascade"
-            });
-        Providers.hasMany(models.RWheels,
-            {
-                onDelete: "cascade"
-            });
-        Providers.hasMany(models.Batteries,
-            {
-                onDelete: "cascade"
-            });
+        Providers.hasMany(models.Frames);
+        Providers.hasMany(models.FWheels);
+        Providers.hasMany(models.Motors);
+        Providers.hasMany(models.RWheels);
+        Providers.hasMany(models.Batteries);
     }
     return Providers;
 

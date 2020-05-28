@@ -24,8 +24,6 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
             },
         }, {
-        paranoid: true,
-        underscored: true
 
     });
     Frames.associate = models => {
@@ -34,7 +32,8 @@ module.exports = (sequelize, Sequelize) => {
                 foreignKey: {
                     allowNull: false,
                     unique: true
-                }
+                },
+                onDelete: 'CASCADE'
             });
             
     }

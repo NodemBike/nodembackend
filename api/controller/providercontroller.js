@@ -81,7 +81,7 @@ exports.delete = (req, res) => {
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
     Providers.destroy(
-        { where: {} }
+        { where: {}, force: true }
     )
         .then(res.send({ message: "All providers have been deleted" }))
         .catch(err => {

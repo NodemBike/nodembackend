@@ -48,11 +48,11 @@ module.exports = (sequelize, Sequelize) => {
     Users.associate = models => {
         Users.hasMany(models.Bikes,
             {
-                onDelete: "cascade"
+                onDelete: "CASCADE"
             });
         Users.hasMany(models.Records,
             {
-                onDelete: "cascade"
+                onDelete: "CASCADE"
             });
     };
 

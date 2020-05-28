@@ -32,8 +32,9 @@ exports.create = (req, res) => {
             Records.create({
                 description: 'New',
                 part: data.uuid,
-                types: 'Fwheel',
-                bikeUuid: data.bikeUuid
+                types: 'Front wheel',
+                bikeUuid: data.bikeUuid,
+                userUuid: data.userUuid
             })
         })
         .catch(err => {
@@ -94,8 +95,9 @@ exports.update = (req, res) => {
             Records.create({
                 description: 'Update',
                 part: data[1].uuid,
-                types: 'Fwheel',
+                types: 'Front wheel',
                 bikeUuid: data[1].bikeUuid,
+                userUuid: data[1].userUuid
             })
         })
         .catch(err => console.log(err));
@@ -103,15 +105,16 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    FWheels.findOne({ where: { uuid: req.params.uuid } })
+    FWheels.findOne({ where: { uuid: req.params.uuid }, force: true })
         .then(
             data => {
                 data.destroy();
                 Records.create({
                     description: 'Delete',
                     part: data.uuid,
-                    types: 'Fwheel',
-                    bikeUuid: data.bikeUuid
+                    types: 'Front wheel',
+                    bikeUuid: data.bikeUuid,
+                    userUuid: data.userUuid
                 })
                 res.redirect('/api/getbikes');
             }

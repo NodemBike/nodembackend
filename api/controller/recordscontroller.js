@@ -64,7 +64,7 @@ exports.getRecordsByUserUUID = (req, res) => {
 }
 // Delete a Bike with the specified uuid in the request
 exports.delete = (req, res) => {
-    Records.findOne({ where: { part: req.params.part } })
+    Records.findOne({ where: { part: req.params.part }, force: true })
         .then(
             data => {
                 data.destroy();
@@ -79,7 +79,7 @@ exports.delete = (req, res) => {
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
     Records.destroy(
-        { where: {} }
+        { where: {}, force: true }
     )
         .then(res.send({ message: "All records have been deleted" }))
         .catch(err => {

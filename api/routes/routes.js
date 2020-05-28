@@ -56,6 +56,7 @@ router.get('/motor/findone/:uuid', motor.findOne);
 
 //router.get("/getbikeparts", bikeparts.getBikeparts);
 router.get("/frame", frame.getFrame);
+router.get("/forks", fork.getFork);
 router.get("/brands", brand.getBrands);
 router.get("/providers", provider.findAll);
 router.get("/states", state.findAll);

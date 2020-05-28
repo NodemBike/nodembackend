@@ -69,7 +69,7 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    Warranties.findOne({where: {uuid: req.params.uuid}})
+    Warranties.findOne({ where: { uuid: req.params.uuid }, force: true})
     .then(
         data => {
             data.destroy();

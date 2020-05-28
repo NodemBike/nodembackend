@@ -70,7 +70,7 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    Brands.findOne({ where: { id: req.params.id } })
+    Brands.findOne({ where: { id: req.params.id }, force: true })
         .then(
             data => {
                 data.destroy();
@@ -85,5 +85,7 @@ exports.delete = (req, res) => {
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
     Brands.destroy(
-        { where: {} }).then(res.send({ message: "All brands have been deleted" })).catch(err => { console.log(err) })
+        {
+            where: {}, force: true
+        }).then(res.send({ message: "All brands have been deleted" })).catch(err => { console.log(err) })
 };

@@ -17,8 +17,8 @@ module.exports.production = {
 module.exports.host = {
     host: "localhost",
     user: "postgres",
-    password: "Marilo321s.",
-    database: "nodemv3",
+    password: "Ed99Ga99.",
+    database: "nodempgtest",
     port: 5432,
     dialect: 'postgres'
 };

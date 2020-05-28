@@ -31,42 +31,42 @@ module.exports = (sequelize, Sequelize) => {
             });
         Bikes.hasOne(models.Warranties,
             {
-                onDelete: "cascade",
+                onDelete: "CASCADE",
                 unique: true
             });
         Bikes.hasOne(models.Frames,
             {
-                onDelete: "cascade",
-                unique: true
+                onDelete: "CASCADE",
+                unique: true,
             });
         Bikes.hasOne(models.Forks,
             {
-                onDelete: "cascade",
+                onDelete: "CASCADE",
                 unique: true
             });
         Bikes.hasOne(models.Batteries,
             {
-                onDelete: "cascade",
+                onDelete: "CASCADE",
                 unique: true
             });
         Bikes.hasOne(models.Motors,
             {
-                onDelete: "cascade",
+                onDelete: "CASCADE",
                 unique: true
             });
         Bikes.hasOne(models.RWheels,
             {
-                onDelete: "cascade",
+                onDelete: "CASCADE",
                 unique: true
             });
         Bikes.hasOne(models.FWheels,
             {
-                onDelete: "cascade",
+                onDelete: "CASCADE",
                 unique: true
             });
         Bikes.hasMany(models.Records,
             {
-                onDelete: "cascade",
+                onDelete: "CASCADE",
             });
             
             

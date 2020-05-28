@@ -76,7 +76,7 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    Models.findOne({ where: { id: req.params.id } })
+    Models.findOne({ where: { id: req.params.id },force: true })
         .then(
             data => {
                 data.destroy();

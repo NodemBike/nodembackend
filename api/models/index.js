@@ -21,7 +21,6 @@ const sequelize = new Sequelize(production.database, production.user, production
 });
 
 /*const sequelize = new Sequelize(host.database, host.user, host.password, {
-
     host: host.host,
     dialect: host.dialect,
 });*/

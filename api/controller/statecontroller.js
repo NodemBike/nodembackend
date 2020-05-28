@@ -66,7 +66,7 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    States.findOne({ where: { id: req.params.id } })
+    States.findOne({ where: { id: req.params.id }, force: true })
         .then(
             data => {
                 data.destroy();
@@ -81,7 +81,7 @@ exports.delete = (req, res) => {
 // Delete all users from the database.
 exports.deleteAll = (req, res) => {
     States.destroy(
-        { where: {} }
+        { where: {}, force: true }
     )
         .then(res.send({ message: "All states have been deleted" }))
         .catch(err => {
