@@ -53,9 +53,6 @@ exports.getBikes = (req, res) => Bikes.findAll({
 // Find a single bike with an uuid
 exports.findOne = (req, res) => {
     Bikes.findOne({
-        where: { uuid: req.params.uuid },
-        include: [{ all: true, nested: true }
-        ]
     })
         .then(data => res.send(data))
         .catch(err => console.log(err));
