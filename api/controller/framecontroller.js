@@ -1,6 +1,7 @@
 const db = require("../models");
 const Frames = db.Frames;
 const Op = db.Sequelize.Op;
+const Records = db.Records;
 
 //Create and Save a new User
 exports.create = (req, res) => {
@@ -22,13 +23,19 @@ exports.create = (req, res) => {
         providerId: req.body.providerId,
         stateId: req.body.stateId,
         bikeUuid: req.body.bikeUuid,
-        
+
     };
 
     // Save User in the database
     Frames.create(part)
         .then(data => {
             res.send(data);
+            Records.create({
+                description: 'New',
+                part: data.uuid,
+                types: 'Frame',
+                bikeUuid: data.bikeUuid
+            })
         })
         .catch(err => {
             res.status(500).send({
@@ -61,8 +68,8 @@ exports.findOne = (req, res) => {
     Frames.findOne({
         where: { uuid: req.params.uuid }
     })
-    .then(data => res.send(data))
-    .catch(err => console.log(err));
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
 };
 
 // Update a User by the uuid in the request
@@ -77,23 +84,41 @@ exports.update = (req, res) => {
             stateId: req.body.stateId,
             bikeUuid: req.body.bikeUuid
         },
-        { where: { uuid: req.params.uuid } }
+        {
+            where: { uuid: req.params.uuid },
+            returning: true,
+            plain: true
+        }
     )
-        .then(data => res.send(data))
+        .then(data => {
+            res.send(data)
+            Records.create({
+                description: 'Update',
+                part: data[1].uuid,
+                types: 'Frame',
+                bikeUuid: data[1].bikeUuid,
+            })
+        })
         .catch(err => console.log(err));
 };
 
 // Delete a User with the specified uuid in the request
 exports.delete = (req, res) => {
-    Frames.findOne({where: {uuid: req.params.uuid}})
-    .then(
-        data => {
-            data.destroy();
-            res.redirect('/api/getbikes');
-        }
-    )
-    .catch(err => {
-        console.log(err)
-    })
+    Frames.findOne({ where: { uuid: req.params.uuid } })
+        .then(
+            data => {
+                data.destroy();
+                Records.create({
+                    description: 'Delete',
+                    part: data.uuid,
+                    types: 'Frame',
+                    bikeUuid: data.bikeUuid
+                })
+                res.redirect('/api/getbikes');
+            }
+        )
+        .catch(err => {
+            console.log(err)
+        })
 };
 

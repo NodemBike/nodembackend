@@ -17,8 +17,7 @@ exports.create = (req, res) => {
     const part = {
         description: req.body.description,
         part: req.body.part,
-        type: req.body.type,
-        date: req.body.date,
+        types: req.body.types,
         bikeUuid: req.body.bikeUuid,
         userUuid: req.body.userUuid
     }
@@ -45,9 +44,9 @@ exports.getRecords = (req, res) => Records.findAll({ include: [{ all: true, nest
 
 
 exports.getRecordsByUserUUID = (req, res) => {
-    Records.findAll({
+    Records.findOne({
         where: {
-            userUuid: req.body.belongsto,
+            userUuid: req.params.userUuid
         },
         include:
             [{ all: true, nested: true }
@@ -63,3 +62,27 @@ exports.getRecordsByUserUUID = (req, res) => {
         }
     });
 }
+// Delete a Bike with the specified uuid in the request
+exports.delete = (req, res) => {
+    Records.findOne({ where: { part: req.params.part } })
+        .then(
+            data => {
+                data.destroy();
+                res.redirect('/api/records');
+            }
+        )
+        .catch(err => {
+            console.log(err)
+        })
+};
+
+// Delete all users from the database.
+exports.deleteAll = (req, res) => {
+    Records.destroy(
+        { where: {} }
+    )
+        .then(res.send({ message: "All records have been deleted" }))
+        .catch(err => {
+            console.log(err)
+        });
+};

@@ -15,11 +15,7 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            type: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            date: {
+            types: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
@@ -33,7 +29,11 @@ module.exports = (sequelize, Sequelize) => {
     Records.associate = models => {
         Records.belongsTo(models.Users,
             {
-                foreignKey: { allowNull: false }
+                foreignKey: { allowNull: true}
+            });
+        Records.belongsTo(models.Bikes,
+            {
+                foreignKey: { allowNull: true }
             });
     }
     return Records;
