@@ -79,7 +79,6 @@ exports.update = (req, res) => {
         {
             name: req.body.name,
             price: req.body.price,
-            date_of_production: req.body.date_of_production,
             image: req.body.image,
             providerId: req.body.providerId,
             stateId: req.body.stateId,
